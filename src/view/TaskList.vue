@@ -10,13 +10,6 @@
         </div>
         <div class="container">
              <div class="card" v-for="(task,index) in tasklist" :key="index">
-       
-<!--       
-     <div class="container">  <div class="badge"><BadgeComponent :label="true ? 'link required' : 'link required'" /></div>
-     <div>
-        <div class="icon"><font-awesome-icon icon="fa-solid fa-pen fa-2xl" /></div>
-        <div class="icon"><font-awesome-icon icon="fa-solid fa-trash fa-2xs" /></div></div>
-      </div> -->
       <div class="card-title">{{ task.taskname }}
       </div>
     </div>
