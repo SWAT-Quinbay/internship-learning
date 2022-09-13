@@ -66,6 +66,20 @@ export default {
   background-color: #ffffff;
 }
 
+.btn--primary--mc {
+   color: white;
+  border: 1px solid #665eff;
+  outline: none;
+  width: max-content;
+  /* height: 80%; */
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 2px 15px;
+  margin-top:5%;
+  background-color: #665eff;
+}
+
 .btn--black {
   color: rgb(255, 255, 255);
   border: 1px solid #000000;

@@ -7,6 +7,7 @@ export default {
       verified: false,
       email: "",
     },
+    
   },
   getters: {
     getUserFromState: (state) => {

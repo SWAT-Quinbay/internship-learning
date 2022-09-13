@@ -13,7 +13,18 @@
       </div>
 
         <div class="modal--content">
-            
+             <div class="action--form--controller">
+            <label for="user-password" class="action--input--label"
+              >Task Description:</label
+            >
+            <input
+              type="text"
+              class="action--input"
+              min="20"
+              max="500"
+              v-model="task.taskname"
+            />
+          </div>
         </div>
 
 
@@ -22,7 +33,7 @@
           <div class="col-3">
             <ButtonComponent
               label="Close"
-              buttonStyle="btn--primary--outline"
+             class="btn--primary--outline"
               @onClick="closeModal()"
               type="button"
             />
@@ -30,7 +41,7 @@
           <div class="col-auto">
             <ButtonComponent
               :label="modalButtonLabel"
-              buttonStyle="btn--primary"
+              class="btn--primary"
              
               type="button"
             />
@@ -44,21 +55,59 @@
 import ButtonComponent from "../components/ButtonComponent.vue"
 export default{
     name:"TaskActionModal",
+    data(){
+      return{
+        task:{
+          taskname:"",
+          day:"",
+          inputtype:""
+        }
+      }
+    },
     components:{
         ButtonComponent,
+    },
+    methods:{
+      closeModal(){
+        this.$emit("close")
+      }
+    },
+    props:{
+      taskdata:{
+        type:Object,
+      }
+    },
+    created(){
+      this.task.taskname=this.taskdata.taskname;
     }
 }
 </script>
 
 <style scoped>
-input:focus,:active{
-  border:none;
+.action--input--label {
+display:flex;
+float:left;
+font-size: 13px;
+font-weight:500;
+}
+
+.action--input {
+  width: 100%;
+  height: 40px;
+ 
+  border-radius: 10px;
+  border: 1px solid #f1f1f1;
+  margin-top: 5px;
+  padding-left: 10px;
+  outline: none;
+}
+
+.action--input:focus {
+  border: 1px solid #b4aef4;
 }
 
 .action--form--controller {
-  margin-bottom: 20px;
-  border:1px solid rgb(175, 175, 175);
-  border-radius:17px;
+  margin-bottom: 33px;
 }
 .modal--bg {
   position: fixed;
