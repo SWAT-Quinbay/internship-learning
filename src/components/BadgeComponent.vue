@@ -41,6 +41,11 @@ export default {
   color: #006908;
 }
 
+.badge--neon--warning--outline {
+  background-color: #fef0b9;
+  color: #b18800;
+}
+
 .badge--warning--outline {
   background-color: #fef0b9;
   color: #bc9102;
