@@ -1,20 +1,21 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import LoginPage from "@/view/LoginPage"
+import LoginPage from "@/view/LoginPage";
 import TaskHomeRoute from "@/view/TaskHomeRoute";
-import TaskPage from "@/view/TaskPage"
-import TaskList from "@/view/TaskList"
-import ReportPage from "@/view/ReportPage"
-import ErrorPage from "@/view/ErrorPage.vue"
-import SignupPage from "@/view/SignupPage"
-import HomePage from "@/view/HomePage"
-import TimerModal from "../components/TimerModal"
+import TaskPage from "@/view/TaskPage";
+import TaskList from "@/view/TaskList";
+import ReportPage from "@/view/ReportPage";
+import ErrorPage from "@/view/ErrorPage.vue";
+import SignupPage from "@/view/SignupPage";
+import HomePage from "@/view/HomePage";
+import TimerModal from "../components/TimerModal";
 
 Vue.use(Router);
 
 const router = new Router({
   mode: "history",
+  linkExactActiveClass: "active",
   routes: [
     {
       path: "/login",
@@ -39,18 +40,20 @@ const router = new Router({
     {
       path: "/createtask",
       component: TaskHomeRoute,
-      children:[{
-        path: "",
-        name: "TaskPage",
-        component: TaskPage,
-      },
-      {
-        path: "tasks",
-        name: "TaskList",
-        component: TaskList,
-      },]
+      children: [
+        {
+          path: "",
+          name: "TaskPage",
+          component: TaskPage,
+        },
+        {
+          path: "tasks",
+          name: "TaskList",
+          component: TaskList,
+        },
+      ],
     },
-    
+
     {
       path: "/viewreport",
       name: "ReportPage",
@@ -63,6 +66,5 @@ const router = new Router({
     },
   ],
 });
-
 
 export default router;
