@@ -36,7 +36,8 @@ export default {
   },
   methods: {
     openModal() {
-      this.showModal = true;
+    //   this.showModal = true;
+    this.$router.push({name:"TaskList"})
     },
     closeModal() {
       this.showModal = false;
