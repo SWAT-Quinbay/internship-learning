@@ -21,6 +21,7 @@
           v-else-if="NavBarData.role === 'RETAILER'"
         />
       </a> -->
+      <a class="navbar-brand" href="#"> Quinbay Training</a>
       <button
         class="navbar-toggler btn--toggle"
         type="button"
@@ -33,16 +34,16 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item me-4">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item me-4">
             <BadgeComponent
               :label="'Name : ' + user.name"
               class="badge--success--outline badge--outline--sm"
             />
-          </li>
+          </li> -->
           <li
             class="nav-item me-4"
-            v-for="(data, index) in navLink"
+            v-for="(data, index) in navBarData.routes"
             :key="index"
           >
             <router-link
@@ -69,7 +70,7 @@
 import ButtonComponent from "@/components/ButtonComponent.vue";
 // import { deleteToken } from "@/utils/storage";
 import { mapGetters } from "vuex";
-import BadgeComponent from "@/components/BadgeComponent.vue";
+// import BadgeComponent from "@/components/BadgeComponent.vue";
 
 export default {
   name: "NavBar",
@@ -88,14 +89,14 @@ export default {
     };
   },
   props: {
-    NavBarData: {
+    navBarData: {
       type: Object,
       default: () => {},
     },
   },
   components: {
     ButtonComponent,
-    BadgeComponent,
+    // BadgeComponent,
   },
   computed: {
     ...mapGetters({

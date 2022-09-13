@@ -1,17 +1,25 @@
 <template>
   <div>
     <div class="container">
-        <div v-for="n in `${noofday}`" :key="n">
-      <div class="card" style="width: 18rem"  >
-        Day : {{n}}
-        <div class="card-body">
-          <div class="card-title"></div>
-          <ButtonComponent label="View Tasks" @onClick="openModal()" />
+      <div v-for="n in `${noofday}`" :key="n">
+        <div class="card" style="width: 18rem">
+          Day : {{ n }}
+          <div class="card-body">
+            <div class="card-title"></div>
+            <ButtonComponent
+              label="View Tasks"
+              @onClick="openModal()"
+              class="btn--primary"
+            />
+          </div>
         </div>
       </div>
-        </div>
 
-      <div class="card" style="width: 18rem; border-style: dotted" @click="addday">
+      <div
+        class="card"
+        style="width: 18rem; border-style: dotted"
+        @click="addday"
+      >
         <font-awesome-icon
           icon="fa-solid fa-circle-plus fa-beat"
           class="icon"
@@ -36,16 +44,16 @@ export default {
   },
   methods: {
     openModal() {
-    //   this.showModal = true;
-    this.$router.push({name:"TaskList"})
+      //   this.showModal = true;
+      this.$router.push({ name: "TaskList" });
     },
     closeModal() {
       this.showModal = false;
     },
-    addday(){
-        console.log(this.noofday)
-        this.$store.dispatch("SET_DAY_COUNT")
-    }
+    addday() {
+      console.log(this.noofday);
+      this.$store.dispatch("SET_DAY_COUNT");
+    },
   },
   components: {
     ButtonComponent,
@@ -54,7 +62,7 @@ export default {
   computed: {
     ...mapGetters({
       tasklist: "getTask",
-      noofday:"getDayCount",
+      noofday: "getDayCount",
     }),
   },
 };
