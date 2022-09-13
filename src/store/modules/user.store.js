@@ -3,6 +3,7 @@ export default {
     user: {
       id: "",
       name: "",
+      role: "ADMIN",
       verified: false,
       email: "",
     },
