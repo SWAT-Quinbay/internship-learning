@@ -1,17 +1,28 @@
 <template>
-  <nav class="navbar navbar-expand-lg" id="navbar--bg">
+  <nav class="navbar navbar-expand-lg" id="NavBar">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <!-- <img
-          src="@/assets/swat.png"
+      <!-- <a class="navbar-brand" href="#">
+        <img
+          src="@/assets/admin-logo.png"
           alt=""
-          width="80"
-          class="d-inline-block align-text-top"
-        /> -->
-       Admin
-      </a>
+          width="200"
+          v-if="NavBarData.role === 'ADMIN'"
+        />
+        <img
+          src="@/assets/dealer-logo.png"
+          alt=""
+          width="200"
+          v-else-if="NavBarData.role === 'DEALER'"
+        />
+        <img
+          src="@/assets/retailer-logo.png"
+          alt=""
+          width="200"
+          v-else-if="NavBarData.role === 'RETAILER'"
+        />
+      </a> -->
       <button
-        class="navbar-toggler"
+        class="navbar-toggler btn--toggle"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
@@ -23,73 +34,112 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <router-link class="nav-link active" aria-current="page" to="/home"
-              >Home</router-link
-            >
-           
-          </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link active"
-              aria-current="page"
-              to="/createtask"
-              >create Task</router-link
-            >
-           
-          </li>
-          <li class="nav-item">
-            <router-link
-              class="nav-link active"
-              aria-current="page"
-              to="/viewreport"
-              >View Report</router-link
-            >
-          
-          </li>
-          <li >
-            <ButtonComponent
-                label="Logout"
-                buttonStyle="btn--primary--outline"
-                type="button"
+          <li class="nav-item me-4">
+            <BadgeComponent
+              :label="'Name : ' + user.name"
+              class="badge--success--outline badge--outline--sm"
             />
           </li>
+          <li
+            class="nav-item me-4"
+            v-for="(data, index) in navLink"
+            :key="index"
+          >
+            <router-link
+              :to="{ name: data.name }"
+              class="nav--link"
+              active-class="active"
+              >{{ data.label }}</router-link
+            >
+          </li>
         </ul>
-        <!-- <div class="d-flex"> -->
-          
-        <!-- </div> -->
+        <div class="d-flex">
+          <ButtonComponent
+            label="Logout"
+            class="btn--primary"
+            @onClick="logout()"
+            type="button"
+          />
+        </div>
       </div>
     </div>
   </nav>
 </template>
-
 <script>
-import ButtonComponent from "./ButtonComponent.vue"
-export default{
-      name:"NavBar",
-    data(){
-        return {
+import ButtonComponent from "@/components/ButtonComponent.vue";
+// import { deleteToken } from "@/utils/storage";
+import { mapGetters } from "vuex";
+import BadgeComponent from "@/components/BadgeComponent.vue";
 
-        }
+export default {
+  name: "NavBar",
+  data() {
+    return {
+      navLink: [
+        {
+          name: "HomePage",
+          label: "Home",
+        },
+        {
+          name: "TaskPage",
+          label: "TaskPage",
+        },
+      ],
+    };
+  },
+  props: {
+    NavBarData: {
+      type: Object,
+      default: () => {},
     },
-    components:{
-        ButtonComponent,
+  },
+  components: {
+    ButtonComponent,
+    BadgeComponent,
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUserFromState",
+    }),
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("LOGOUT_USER");
+      // deleteToken();
+      this.$router.replace("/");
     },
-  
-}
+  },
+};
 </script>
-
-
 <style scoped>
-  #navbar--bg {
-    background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
-    position :sticky;
-    z-index: 1;
-    top:0%
+#NavBar {
+  /* box-shadow: 0 5px 20px rgb(0 41 112 / 10%); */
+  border-bottom: #ed6704 1px solid;
+  background-color: #ffffff;
+}
+.nav--link {
+  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.btn--toggle {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.active {
+  color: #ffffff;
+  border-radius: 15px;
+  padding: 3px 10px;
+  font-size: 13px;
+  background-color: #625afa;
+}
+
+@media screen and (max-width: 600px) {
+  .nav-item {
+    margin: 10px 10px 0px 10px !important;
   }
-  #nav li.nav-link active{
-    color:red;
-  }
- 
+}
 </style>
