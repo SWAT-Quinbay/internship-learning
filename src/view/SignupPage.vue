@@ -42,11 +42,10 @@
 
           <div class="action--form--controller">
             <label for="user-password" class="action--input--label"
-              >Enter Password:</label
+              >Re-Enter Password:</label
             >
             <input
               type="password"
-             
               class="action--input"
               placeholder="Re-Enter Password"
             />
@@ -59,7 +58,7 @@
               
             <ButtonComponent
             label="Sign Up"
-            buttonStyle="btn--primary"
+            class="btn--primary"
            
             type="button"
           />
@@ -90,14 +89,16 @@ export default{
 
 <style scoped>
 .action--input--label {
-  font-size: 14px;
-  font-weight: 700;
+display:flex;
+float:left;
+font-size: 13px;
+font-weight:500;
 }
 
 .action--input {
   width: 100%;
   height: 40px;
-  background-color: #f1f1f1;
+ 
   border-radius: 10px;
   border: 1px solid #f1f1f1;
   margin-top: 5px;
@@ -106,11 +107,11 @@ export default{
 }
 
 .action--input:focus {
- border: 1px solid #777474;
+  border: 1px solid #b4aef4;
 }
 
 .action--form--controller {
-  margin-bottom: 20px;
+  margin-bottom: 33px;
 }
 
 .login {
@@ -120,8 +121,9 @@ export default{
   color: black;
   border-radius: 7px;
   padding: 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
-    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
+    box-shadow:0px 0px 15px 3px #e6e8eb;
 }
 
 .login--body {
@@ -129,15 +131,15 @@ export default{
 }
 
 .login--header {
-  color: #436fc9;
+  color: #655dff;
   padding-top: 5px;
   font-style: bold;
   margin-bottom: 25px;
   font-weight: bold;
 }
 
-.login--button{
-  margin-top : 40px;
-  margin-bottom : 25px;
+.login--button {
+  margin-top: 40px;
+  margin-bottom: 25px;
 }
 </style>
