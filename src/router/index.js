@@ -1,15 +1,27 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import LoginPage from "@/view/LoginPage";
-import TaskHomeRoute from "@/view/TaskHomeRoute";
-import TaskPage from "@/view/TaskPage";
-import TaskList from "@/view/TaskList";
-import ReportPage from "@/view/ReportPage";
-import ErrorPage from "@/view/ErrorPage.vue";
-import SignupPage from "@/view/SignupPage";
-import HomePage from "@/view/HomePage";
-import TimerModal from "../components/TimerModal";
+import LoginPage from "@/views/LoginPage";
+// import TaskHomeRoute from "@/views/TaskHomeRoute";
+// import TaskPage from "@/views/TaskPage";
+// import TaskList from "@/views/TaskList";
+// import ReportPage from "@/views/ReportPage";
+import ErrorPage from "@/views/ErrorPage.vue";
+import Register from "@/views/SignupPage";
+// import HomePage from "@/views/HomePage";
+// import TimerModal from "../components/TimerModal";
+
+// import TrainingRouterPage from "@/views/Training/TrainingRouterPage";
+import TrainingDashboard from "@/views/Training/TrainingDashboard";
+import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
+import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
+
+import TrainingDashboardRouter from "@/views/Training/TrainingDashboardRouter";
+import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
+
+import AdminRouterPage from "@/views/Admin/AdminRouterPage";
+
+import Employee from "@/views/Admin/Employee";
 
 Vue.use(Router);
 
@@ -18,47 +30,92 @@ const router = new Router({
   linkExactActiveClass: "active",
   routes: [
     {
+      path: "/",
+      redirect: () => {
+        return { name: "LoginPage" };
+      },
+    },
+    {
       path: "/login",
       name: "LoginPage",
       component: LoginPage,
     },
+    // {
+    //   path: "/home",
+    //   name: "HomePage",
+    //   component: HomePage,
+    // },
+    // {
+    //   path: "/timer",
+    //   name: "TimerModal",
+    //   component: TimerModal,
+    // },
     {
-      path: "/home",
-      name: "HomePage",
-      component: HomePage,
+      path: "/register",
+      name: "Register",
+      component: Register,
     },
+    // {
+    //   path: "/createtask",
+    //   component: TaskHomeRoute,
+    //   children: [
+    //     {
+    //       path: "",
+    //       name: "TaskPage",
+    //       component: TaskPage,
+    //     },
+    //     {
+    //       path: "tasks",
+    //       name: "TaskList",
+    //       component: TaskList,
+    //     },
+    //   ],
+    // },
+
     {
-      path: "/timer",
-      name: "TimerModal",
-      component: TimerModal,
-    },
-    {
-      path: "/signup",
-      name: "SignupPage",
-      component: SignupPage,
-    },
-    {
-      path: "/createtask",
-      component: TaskHomeRoute,
+      path: "/admin",
+      component: AdminRouterPage,
       children: [
         {
-          path: "",
-          name: "TaskPage",
-          component: TaskPage,
+          path: "training",
+          component: TrainingDashboardRouter,
+          children: [
+            {
+              path: "",
+              name: "TrainingDashboard",
+              component: TrainingDashboard,
+            },
+            {
+              path: ":trainingId",
+              component: TrainingDetailRouter,
+              children: [
+                {
+                  path: "",
+                  name: "TrainingDetailPage",
+                  component: TrainingDetailPage,
+                },
+                {
+                  path: ":dayId",
+                  name: "TrainingDayDetailPage",
+                  component: TrainingDayDetailPage,
+                },
+              ],
+            },
+          ],
         },
         {
-          path: "tasks",
-          name: "TaskList",
-          component: TaskList,
+          path: "employee",
+          name: "Employee",
+          component: Employee,
         },
       ],
     },
 
-    {
-      path: "/viewreport",
-      name: "ReportPage",
-      component: ReportPage,
-    },
+    // {
+    //   path: "/viewreport",
+    //   name: "ReportPage",
+    //   component: ReportPage,
+    // },
     {
       path: "*",
       name: "ErrorPage",
