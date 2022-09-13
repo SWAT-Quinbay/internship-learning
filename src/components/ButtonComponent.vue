@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .btn--primary {
   color: white;
-  border: 1px solid #665eff;
+  border: 1px solid #5653ff;
   outline: none;
   width: 100%;
   /* height: 35px; */
@@ -38,11 +38,25 @@ export default {
   font-weight: 700;
   border-radius: 8px;
   padding: 10px 15px;
-  background-color: #665eff;
+  background-color: #5653ff;
 }
+
+.btn--secondary--outline--sm {
+  color: #000000;
+  border: 1px solid #a4a4a4;
+  outline: none;
+  width: fit-content;
+  /* height: 35px; */
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 5px 15px;
+  background-color: transparent;
+}
+
 .btn--primary--outline {
-  color: #665eff;
-  border: 1px solid #665eff;
+  color: #5653ff;
+  border: 1px solid #5653ff;
   width: 100%;
   /* height: 35px; */
   font-size: 14px;
@@ -96,7 +110,7 @@ export default {
 
 .btn--primary--sm--100 {
   color: #ffffff;
-  border: 1px solid #665eff;
+  border: 1px solid #5653ff;
   outline: none;
   width: 100%;
   height: 35px;
@@ -104,7 +118,7 @@ export default {
   font-weight: 700;
   border-radius: 8px;
   padding: 5px 20px;
-  background-color: #665eff;
+  background-color: #5653ff;
 }
 
 .btn--disabled--sm--100 {
@@ -122,7 +136,7 @@ export default {
 
 .btn--primary--sm {
   color: #ffffff;
-  border: 1px solid #665eff;
+  border: 1px solid #5653ff;
   /* border: none; */
   outline: none;
   /* width: 100%; */
@@ -131,12 +145,12 @@ export default {
   font-weight: 700;
   border-radius: 8px;
   padding: 5px 20px;
-  background-color: #665eff;
+  background-color: #5653ff;
 }
 
 .btn--primary--sm--outline {
-  color: #665eff;
-  border: 1px solid #665eff;
+  color: #5653ff;
+  border: 1px solid #5653ff;
   /* border: none; */
   outline: none;
   /* width: 100%; */
@@ -149,8 +163,8 @@ export default {
 }
 
 .btn--primary--sm--outline--100 {
-  color: #665eff;
-  border: 1px solid #665eff;
+  color: #5653ff;
+  border: 1px solid #5653ff;
   /* border: none; */
   outline: none;
   width: 100%;

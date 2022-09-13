@@ -115,7 +115,7 @@ export default {
 <style scoped>
 #NavBar {
   /* box-shadow: 0 5px 20px rgb(0 41 112 / 10%); */
-  border-bottom: #ed6704 1px solid;
+  border-bottom: 1px solid #c7c7c7;
   background-color: #ffffff;
 }
 .nav--link {

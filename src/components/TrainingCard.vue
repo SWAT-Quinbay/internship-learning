@@ -15,7 +15,13 @@
         />
         <BadgeComponent
           :label="training.tasks.length + ' Tasks'"
-          class="badge--basic--neon badge--warning--outline"
+          class="badge--basic--neon badge--neon--warning--outline"
+        />
+      </div>
+      <div class="mt-4">
+        <ButtonComponent
+          label="View Course"
+          class="btn--secondary--outline--sm"
         />
       </div>
     </div>
@@ -23,6 +29,7 @@
 </template>
 <script>
 import BadgeComponent from "@/components/BadgeComponent.vue";
+import ButtonComponent from "@/components/ButtonComponent.vue";
 export default {
   name: "TrainingCard",
   props: {
@@ -33,6 +40,7 @@ export default {
   },
   components: {
     BadgeComponent,
+    ButtonComponent,
   },
   methods: {
     showTrainingPage(id) {
