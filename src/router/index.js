@@ -22,6 +22,8 @@ import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
 import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 
 import Employee from "@/views/Admin/Employee";
+import EmployeeRouter from "@/views/Admin/EmployeeRouter"
+import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue"
 
 Vue.use(Router);
 
@@ -105,8 +107,20 @@ const router = new Router({
         },
         {
           path: "employee",
-          name: "Employee",
-          component: Employee,
+          component: EmployeeRouter,
+          children:[
+            {
+              path:"",
+              name:"Employee",
+              component:Employee
+            },
+            {
+              path:":employeeId",
+              name:"EmployeeProfile",
+              component:EmployeeProfile
+            },
+
+          ]
         },
       ],
     },
