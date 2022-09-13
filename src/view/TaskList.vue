@@ -1,10 +1,11 @@
 <template>
     <div class="container-fluid">
         <div class="head">
+            <div class="button">
             <ButtonComponent 
             label="+ Add Task"
-            class="button"
-            @onClick="show"/>
+            class="btn--primary--outline"
+            @onClick="show"/></div>
             <input type="search"/>
         </div>
         <div class="container">
