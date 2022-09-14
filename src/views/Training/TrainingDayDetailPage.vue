@@ -12,7 +12,7 @@
       <div class="col-12">
         <div class="row">
           <div class="col-md-8">
-            <TrainingDaylist
+            <TrainingTaskList
               v-for="(data, index) in 10"
               :key="index"
               :index="index"
@@ -75,7 +75,7 @@
   </div>
 </template>
 <script>
-import TrainingDaylist from "@/components/TrainingDayList.vue";
+import TrainingTaskList from "@/components/TrainingTaskList.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import BadgeComponent from "@/components/BadgeComponent.vue";
@@ -87,7 +87,7 @@ export default {
     };
   },
   components: {
-    TrainingDaylist,
+    TrainingTaskList,
     ButtonComponent,
     TextInputComponent,
     BadgeComponent,
