@@ -33,11 +33,18 @@
         </div>
         <div class="col-auto">
           <ButtonComponent
-            label="View Tasks"
+            label="View Task Details"
             class="btn--secondary--outline--sm"
-            data-bs-toggle="collapse"
-            :data-bs-target="'#collapseExample' + index"
+            @onClick="showTaskPage(2)"
           />
+          <span class="mx-2 ms-3">
+            <font-awesome-icon
+              class="icon--arrow--right"
+              icon="fa-solid fa-chevron-down"
+              data-bs-toggle="collapse"
+              :data-bs-target="'#collapseExample' + index"
+            />
+          </span>
         </div>
       </div>
     </div>
@@ -45,9 +52,27 @@
     <div class="collapse" :id="'collapseExample' + index">
       <div class="p-3">
         <div class="card card-body">
-          Some placeholder content for the collapse component. This panel is
-          hidden by default but revealed when the user activates the relevant
-          trigger.
+          <div
+            class="row align-items-center my-1"
+            v-for="(data, index) in 10"
+            :key="index"
+          >
+            <div class="col-auto">
+              <img
+                src="@/assets/check.png"
+                alt="checkbox"
+                width="20"
+                :class="
+                  (index + 1) % 2 == 0
+                    ? 'check--logo--completed'
+                    : 'check--logo--incompleted'
+                "
+              />
+            </div>
+            <div class="col-10 px-0">
+              <p class="task--title">Task 1</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,6 +94,14 @@ export default {
   },
   components: {
     ButtonComponent,
+  },
+  methods: {
+    showTaskPage(id) {
+      this.$router.push({
+        name: "TrainingDayDetailPage",
+        params: { dayId: id },
+      });
+    },
   },
 };
 </script>
@@ -95,10 +128,18 @@ export default {
   border-radius: 0px 0px 10px 10px;
 }
 
+.icon--arrow--right {
+  cursor: pointer;
+}
+
 .card--list {
   /* background-color: #f1f1f1; */
   /* border: 1px solid rgb(229, 229, 229); */
   padding: 12px;
+}
+
+.task--title {
+  margin: 0px;
 }
 
 .day--title {

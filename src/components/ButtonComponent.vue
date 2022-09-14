@@ -67,7 +67,7 @@ export default {
 }
 
 .btn--primary--mc {
-   color: white;
+  color: white;
   border: 1px solid #665eff;
   outline: none;
   width: max-content;
@@ -76,7 +76,7 @@ export default {
   font-weight: 500;
   border-radius: 8px;
   padding: 2px 15px;
-  margin-top:5%;
+  margin-top: 5%;
   background-color: #665eff;
 }
 
@@ -210,12 +210,26 @@ export default {
   border: 1px solid #000000;
   /* border: none; */
   outline: none;
-  /* width: 100%; */
+  width: 100%;
   /* height: 30px; */
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
-  padding: 5px 20px;
+  padding: 5px 0px;
+  background-color: #ffffff;
+}
+
+.btn--danger--sm--fx {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  /* border: none; */
+  outline: none;
+  width: 100%;
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 5px 0px;
   background-color: #ffffff;
 }
 
@@ -241,7 +255,7 @@ export default {
   font-size: 12px;
   font-weight: 700;
   border-radius: 8px;
-  padding: 5px 20px;
+  padding: 5px 15px;
   background-color: #ffffff;
 }
 
