@@ -1,19 +1,23 @@
 <template>
   <div class="form--controller">
     <label :for="labelFor" v-if="label" class="label--style">{{ label }}</label>
-    <input
-      :type="type"
-      :name="name"
-      :placeholder="placeholder"
-      :value="value"
+    <br />
+    <select
+      name=""
+      id=""
       @input="$emit('input', $event.target.value)"
       class="form--control"
-    />
+    >
+      <option :value="null" :key="-1">Select Day</option>
+      <option v-for="(item, index) in options" :value="item.value" :key="index">
+        {{ item.label }}
+      </option>
+    </select>
   </div>
 </template>
 <script>
 export default {
-  name: "TextInputComponent",
+  name: "SelectInputComponent",
   props: {
     labelFor: {
       type: String,
@@ -23,15 +27,11 @@ export default {
       type: String,
       required: true,
     },
+    options: {
+      type: Array,
+      required: true,
+    },
     value: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    placeholder: {
       type: String,
       required: true,
     },
@@ -51,7 +51,8 @@ export default {
   border: 1px solid rgb(222, 222, 222);
   border-radius: 10px;
   padding: 6px 10px;
-  width: 100%;
+  width: fit-content;
+  padding-right: 20px;
 }
 
 .form--control::placeholder {

@@ -27,7 +27,7 @@
               />
             </div>
             <div class="col-auto">
-              <p class="day--title">Day {{ index + 1 }}</p>
+              <p class="day--title">Day {{ trainingDay.name }}</p>
             </div>
           </div>
         </div>
@@ -54,23 +54,23 @@
         <div class="card card-body">
           <div
             class="row align-items-center my-1"
-            v-for="(data, index) in 10"
+            v-for="(data, index) in trainingDay.tasks"
             :key="index"
           >
             <div class="col-auto">
               <img
                 src="@/assets/check.png"
                 alt="checkbox"
-                width="20"
+                width="18"
                 :class="
-                  (index + 1) % 2 == 0
+                  data.status
                     ? 'check--logo--completed'
                     : 'check--logo--incompleted'
                 "
               />
             </div>
             <div class="col-10 px-0">
-              <p class="task--title">Task 1</p>
+              <p class="task--title">{{ data.name }}</p>
             </div>
           </div>
         </div>
@@ -83,6 +83,10 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 export default {
   name: "TrainingDaylist",
   props: {
+    trainingDay: {
+      type: Object,
+      default: () => {},
+    },
     index: {
       type: Number,
       required: true,

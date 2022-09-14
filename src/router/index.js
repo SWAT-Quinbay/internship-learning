@@ -16,7 +16,7 @@ import CreateTraining from "@/views/Training/CreateTraining";
 import TrainingDashboard from "@/views/Training/TrainingDashboard";
 import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
 import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
-import CreateDay from "@/views/Training/CreateDay"
+import CreateDay from "@/views/Training/CreateDay";
 import TrainingDashboardRouter from "@/views/Training/TrainingDashboardRouter";
 import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
 
@@ -112,7 +112,6 @@ const router = new Router({
                   name: "TrainingDayDetailPage",
                   component: TrainingDayDetailPage,
                 },
-                
               ],
             },
           ],
