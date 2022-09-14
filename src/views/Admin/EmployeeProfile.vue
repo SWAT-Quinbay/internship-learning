@@ -12,7 +12,9 @@
       </div>
     </div>
     <div class="container">
-        <div class="d-flex gap-4"><h4>Trainings Assigned</h4><div class="circle mt-2">2</div></div>
+        <div class="d-flex gap-4 p-3 pb-0 mb-0"><h4>Trainings Assigned</h4>
+        </div>
+        <hr>
      
 
       
@@ -26,10 +28,7 @@ export default {
 };
 </script>
 <style scoped>
-.circle{
-    background-color: whitesmoke;
-    border-radius: 20px;
-}
+
 .container {
   border-radius: 12px;
   border: 1px solid rgb(223, 223, 223);

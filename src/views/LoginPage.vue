@@ -4,7 +4,7 @@
       <div class="col-11 col-md-4">
         <div class="login">
           <center>
-            <h4 class="login--header">LOGIN</h4>
+            <h4 class="login--header">Sign-in to your account</h4>
           </center>
           <div class="action--form--controller">
             <label for="user-name" class="action--input--label"
@@ -17,10 +17,11 @@
               required
             />
           </div>
-          <div class="action--form--controller">
-            <label for="user-password" class="action--input--label"
+          <div class="action--form--controller ">
+     <label for="user-password" class="action--input--label"
               >Enter Password:</label
             >
+            
             <input
               type="password"
               class="action--input"
@@ -41,6 +42,9 @@
               </div>
             </div>
           </div>
+
+          <div class="fw-normal text-center" style="cursor:pointer" @click="navigate"><p style="color:#5653ff;font-size:14px">Don't have an account ?</p></div>
+
         </div>
       </div>
     </div>
@@ -57,23 +61,29 @@ export default {
   components: {
     ButtonComponent,
   },
+  methods:{
+    navigate(){
+      this.$router.push({path:"register"})
+    }
+  }
 };
 </script>
 
 <style scoped>
+
 .action--input--label {
 display:flex;
 float:left;
-font-size: 13px;
-font-weight:500;
+font-size: 14px;
+
 }
 
 .action--input {
   width: 100%;
   height: 40px;
- 
+ font-weight:500;
   border-radius: 10px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #d4d4d4;
   margin-top: 5px;
   padding-left: 10px;
   outline: none;
@@ -84,7 +94,7 @@ font-weight:500;
 }
 
 .action--form--controller {
-  margin-bottom: 33px;
+  margin-bottom: 27px;
 }
 
 .login {
@@ -104,7 +114,7 @@ font-weight:500;
 }
 
 .login--header {
-  color: #655dff;
+  color: black;
   padding-top: 5px;
   font-style: bold;
   margin-bottom: 25px;

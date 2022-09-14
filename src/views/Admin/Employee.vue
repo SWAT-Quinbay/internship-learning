@@ -1,7 +1,25 @@
 <template>
 
   <div class="container">
-    <router-view/>
+      <div class="d-flex gap-3 align-items-center search">
+      <div class="p-2 w-75">
+         <div class="action--form--controller">
+            <input
+              type="text"
+              class="action--input"
+              required
+            />
+          </div>
+      </div>
+      <div class="p-2 w-25 ">
+        <ButtonComponent 
+        label="Search"
+        class="btn--primary"
+        />
+      </div>
+      
+    </div>
+
     <div class="d-flex gap-2 card--">
       <div class="w-50">Name</div>
       <div class="w-50">Email</div>
@@ -11,7 +29,7 @@
     </div>
 
 
-       <div class="d-flex gap-2 card--content">
+       <div class="d-flex gap-2 card--content" @click="navigate">
       <div class="w-50">Monisha</div>
       <div class="w-50">monisha@gmail.com</div>
       <div class="w-50">Developer</div>
@@ -19,50 +37,28 @@
       <div class="w-50">view</div>
     </div>
 
- <div class="d-flex gap-2 card--content">
+ <div class="d-flex gap-2 card--content " @click="navigate">
       <div class="w-50">Monisha</div>
       <div class="w-50">monisha@gmail.com</div>
       <div class="w-50">Developer</div>
       <div class="w-50">Yes</div>
-      <div class="w-50" @click="navigate">view</div>
+      <div class="w-50">view</div>
     </div>
     
-    <!-- <table class="table ">
- <thead>
-  <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Designation</th>
-      <th scope="col">Verified</th>
-       <th scope="col">Tasks Completed</th>
-    </tr>
- </thead>
- <tbody>
-  <tr>
-    <td>Monisha</td>
-    <td>monisha.a@Quinbay.com</td>
-    <td>SDET</td>
-    <td>yes</td>
-    <td>view</td>
-  </tr>
-  <tr>
-    <td>Monisha</td>
-    <td>monisha.a@Quinbay.com</td>
-    <td>SDET</td>
-    <td>yes</td>
-    <td>view</td>
-  </tr>
- </tbody>
-    </table> -->
+    
   </div>
 </template>
 <script>
+import ButtonComponent from "@/components/ButtonComponent.vue"
 export default {
   name: "TrainingRouterPage",
   data(){
     return{
       id:2
     }
+  },
+  components:{
+    ButtonComponent
   },
   methods:{
     navigate(){
@@ -74,6 +70,25 @@ export default {
 };
 </script>
 <style scoped>
+
+.action--input {
+  width: 100%;
+  height: 40px;
+ font-weight:500;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  padding-left: 10px;
+  outline: none;
+}
+
+.action--input:focus {
+  border: 1px solid #b4aef4;
+}
+
+.search {
+  margin-bottom: 27px;
+  margin-top: 40px;
+}
 .container{
   margin-top: 20px;
   border-radius: 17px;
@@ -82,6 +97,7 @@ export default {
   padding:18px 5px 18px 5px;
   background-color: #f2f5f8;
   font-weight: 600;
+  font-size:16px;
   text-align: center;
 }
 .card--content{
@@ -95,6 +111,7 @@ export default {
 .card--content:hover{
   cursor: pointer;
   color:#32373e;
+  font-size:15px;
 }
 /* table{
   border-radius: 17px;
