@@ -1,6 +1,6 @@
 <template>
   <div class="form--controller">
-    <label :for="labelFor" class="label--style">{{ label }}</label>
+    <label :for="labelFor" v-if="label" class="label--style">{{ label }}</label>
     <input
       :type="type"
       :placeholder="placeholder"
@@ -44,9 +44,14 @@ export default {
 .form--control {
   border: 1px solid rgb(222, 222, 222);
   border-radius: 10px;
-  padding: 8px 10px;
+  padding: 6px 10px;
   width: 100%;
 }
+
+.form--control::placeholder {
+  font-size: 15px;
+}
+
 .label--style {
   margin-bottom: 8px;
   font-weight: 500;
