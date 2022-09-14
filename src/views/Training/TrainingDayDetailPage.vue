@@ -12,11 +12,12 @@
       <div class="col-12">
         <div class="row">
           <div class="col-md-8">
-            <TrainingDaylist
+            <TrainingTaskList
               v-for="(data, index) in 10"
               :key="index"
               :index="index"
               :lastIndex="10"
+              @show="show"
             />
           </div>
           <div class="col-md-4">
@@ -72,26 +73,59 @@
         </div>
       </div>
     </div>
+
+
+    <div><TaskActionModal v-if="showModal"
+    @close="close"
+    :taskdata="temp"
+    /></div>
   </div>
 </template>
 <script>
-import TrainingDaylist from "@/components/TrainingDayList.vue";
+import TrainingTaskList from "@/components/TrainingTaskList.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import BadgeComponent from "@/components/BadgeComponent.vue";
+import TaskActionModal from "@/components/TaskActionModal.vue"
+// import {mapGetters} from "vuex"
 export default {
   name: "TrainingDayDetailPage",
   data() {
     return {
       dayId: this.$route.params.dayId,
+      showModal:false,
+     temp:{
+      id:0,
+      name:"",
+      description:""
+     }
     };
   },
   components: {
-    TrainingDaylist,
+    TrainingTaskList,
     ButtonComponent,
     TextInputComponent,
     BadgeComponent,
+    TaskActionModal
   },
+  methods:{
+    show(taskdata){
+      console.log(taskdata)
+      this.temp={...taskdata}
+      this.showModal=true
+    },
+     close(){
+      this.showModal=false
+    }
+  },
+  //  computed:{
+  //   ...mapGetters({
+  //     tasklist:'getTask'
+  //   })
+  // },
+  // created(){
+  //   this.$store.dispatch("GET_TASK")
+  // }
 };
 </script>
 <style scoped>

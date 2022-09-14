@@ -5,44 +5,63 @@
         class="modal--header d-flex justify-content-between align-items-center"
       >
         <div>
-          <h5 class="modal--header--text">Task List</h5>
+          <h5 class="modal--header--text">Edit Task</h5>
         </div>
         <div>
           <span class="close" @click="closeModal">&times;</span>
         </div>
       </div>
-
+<!-- {{taskdata}} -->
         <div class="modal--content">
              <div class="action--form--controller">
-            <label for="user-password" class="action--input--label"
-              >Task Description:</label
+            <label class="action--input--label"
+              >Task Name:</label
             >
             <input
               type="text"
               class="action--input"
               min="20"
               max="500"
-              v-model="task.taskname"
+              v-model="task.name"
             />
           </div>
+          <div class="action--form--controller">
+            <label  class="action--input--label"
+              >Task Description:</label
+            >
+            <textarea
+              type="text"
+              class="action--input h-100"
+              min="20"
+              v-model="task.description">
+            </textarea>
+          </div>
+
+          <label for="link" class="action--input--label mt-0">Choose Submission type:</label><br>
+          <div class="d-flex gap-2 ml-4 action--input--label  mt-2">
+          <input type="radio" name="taskType" v-model="task.taskType" value="submit" />Submit
+          <input type="radio" name="taskType" v-model="task.taskType" value="link"/>Link
+          </div>
+          
+ 
         </div>
 
 
          <div class="modal--footer">
         <div class="d-flex justify-content-end gap-1">
-          <div class="col-3">
+          <div class="col-2">
             <ButtonComponent
               label="Close"
-             class="btn--primary--outline"
+             class="btn--primary--outline--ps"
               @onClick="closeModal()"
               type="button"
             />
           </div>
-          <div class="col-auto">
+          <div class="col-auto ">
             <ButtonComponent
-              :label="modalButtonLabel"
-              class="btn--primary"
-             
+              label="Save"
+              class="btn--primary--ps"
+
               type="button"
             />
           </div>
@@ -58,7 +77,8 @@ export default{
     data(){
       return{
         task:{
-          taskname:"",
+          name:"",
+          description:"",
           day:"",
           inputtype:""
         }
@@ -78,27 +98,30 @@ export default{
       }
     },
     created(){
-      this.task.taskname=this.taskdata.taskname;
+      this.task.name=this.taskdata.name;
+      this.task.description=this.taskdata.description;
     }
 }
 </script>
 
 <style scoped>
+
 .action--input--label {
 display:flex;
 float:left;
-font-size: 13px;
-font-weight:500;
+font-size: 14px;
+
 }
 
 .action--input {
   width: 100%;
   height: 40px;
- 
+ font-weight:500;
   border-radius: 10px;
-  border: 1px solid #f1f1f1;
+  border: 1px solid #d4d4d4;
   margin-top: 5px;
   padding-left: 10px;
+  font-size: 15px;
   outline: none;
 }
 
@@ -107,7 +130,7 @@ font-weight:500;
 }
 
 .action--form--controller {
-  margin-bottom: 33px;
+  margin-bottom: 20px;
 }
 .modal--bg {
   position: fixed;
@@ -120,7 +143,7 @@ font-weight:500;
   background-color: rgba(0, 0, 0, 0.481);
 }
 .modal--body {
-  width: 45%;
+  width: 43%;
   margin: 5% auto;
   background-color:white;
   border-radius: 1vh;
@@ -146,6 +169,7 @@ font-weight:500;
 }
 .modal--header--text {
   margin: 0;
+  font-size:18px;
 }
 
 .modal--header {

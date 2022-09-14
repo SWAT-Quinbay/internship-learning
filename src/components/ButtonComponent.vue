@@ -41,6 +41,19 @@ export default {
   background-color: #5653ff;
 }
 
+.btn--primary--ps {
+  color: white;
+  border: 1px solid #5653ff;
+  outline: none;
+  width: 100%;
+  /* height: 35px; */
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 3px 10px;
+  background-color: #5653ff;
+}
+
 .btn--secondary--outline--sm {
   color: #000000;
   border: 1px solid #a4a4a4;
@@ -63,6 +76,18 @@ export default {
   font-weight: 700;
   border-radius: 8px;
   padding: 10px 15px;
+  background-color: #ffffff;
+}
+
+.btn--primary--outline--ps {
+  color: #5653ff;
+  border: 1px solid #5653ff;
+  width: 100%;
+  /* height: 35px; */
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 3px 10px;
   background-color: #ffffff;
 }
 

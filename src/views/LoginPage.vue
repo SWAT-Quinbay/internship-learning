@@ -21,7 +21,6 @@
      <label for="user-password" class="action--input--label"
               >Enter Password:</label
             >
-            
             <input
               type="password"
               class="action--input"
@@ -42,9 +41,7 @@
               </div>
             </div>
           </div>
-
           <div class="fw-normal text-center" style="cursor:pointer" @click="navigate"><p style="color:#5653ff;font-size:14px">Don't have an account ?</p></div>
-
         </div>
       </div>
     </div>
