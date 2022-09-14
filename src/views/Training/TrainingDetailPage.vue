@@ -12,7 +12,8 @@
 
       <div class="mb-2"><ButtonComponent 
       label="Add Day & Task"
-      class="btn--secondary--outline--sm"/></div>
+      class="btn--secondary--outline--sm"
+      @onClick="navigate"/></div>
 
       <div class="col-12">
         <div class="row">
@@ -97,6 +98,11 @@ export default {
     TextInputComponent,
     BadgeComponent,
   },
+  methods:{
+    navigate(){
+      this.$router.push({name:"CreateDay"})
+    }
+  }
 };
 </script>
 <style scoped>
