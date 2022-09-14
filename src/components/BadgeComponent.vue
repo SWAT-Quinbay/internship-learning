@@ -1,7 +1,7 @@
 <template>
-  <p>
+  <span>
     {{ label }}
-  </p>
+  </span>
 </template>
 <script>
 export default {
