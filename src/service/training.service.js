@@ -1,23 +1,46 @@
-import axios from "axios"
+import axios from "axios";
+import { BASE_TRAINGING_URL } from "@/constants/url.constant.js";
 
-export const getTraining = ({success,error})=>{
-    axios.get("http://10.30.1.35:8083/")
-    .then((res)=>{
-        success && success(res)
+export const getTraining = ({ success, error }) => {
+  axios
+    .get(`${BASE_TRAINGING_URL}/all-training`)
+    .then((res) => {
+      success && success(res);
     })
-    .catch((err)=>{
-        error && error(err)
-    })
-}
+    .catch((err) => {
+      error && error(err);
+    });
+};
 
-export const setTraining = ({success,error,trainingdata})=>{
-    axios.post("http://10.30.1.35:8083/training",trainingdata)
-    .then((res)=>{
-        success && success(res)
+export const createTraining = ({ success, error, trainingdata }) => {
+  axios
+    .post(`${BASE_TRAINGING_URL}/training`, trainingdata)
+    .then((res) => {
+      success && success(res);
     })
-    .catch((err)=>{
-        error && error(err)
+    .catch((err) => {
+      error && error(err);
+    });
+};
+
+export const createDayAndTasks = ({ success, error, payload }) => {
+  axios
+    .post(`${BASE_TRAINGING_URL}/day`, payload)
+    .then((res) => {
+      success && success(res);
     })
-}
+    .catch((err) => {
+      error && error(err);
+    });
+};
 
-
+export const getTrainingById = ({ success, error, trainingId }) => {
+  axios
+    .get(`${BASE_TRAINGING_URL}/training/${trainingId}`)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};

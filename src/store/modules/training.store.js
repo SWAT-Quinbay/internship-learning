@@ -1,40 +1,79 @@
-import {getTraining,setTraining} from "@/service/training.service"
+import {
+  getTraining,
+  createTraining,
+  getTrainingById,
+  createDayAndTasks,
+} from "@/service/training.service";
 export default {
-    state:{
-        trainingList:[]
+  state: {
+    trainingList: [],
+    trainingDayList: [],
+  },
+  getters: {
+    getTrainingList(state) {
+      return state.trainingList;
     },
-    getters:{
-        getTrainingList(state){
-            return state.trainingList
-        }
+    getTrainingDayList(state) {
+      return state.trainingDayList;
     },
-    mutations:{
-        setTrainingList(state,value){
-            state.trainingList=value
-        }
+  },
+  mutations: {
+    setTrainingList(state, value) {
+      state.trainingList = value;
     },
-    actions:{
-        SET_TRAINING_LIST(state,trainingdata){
-            setTraining({
-                success: (res)=>{
-                    console.log("training updated",res)
-                    this.$store.dispatch("GET_TRAINING_LIST")
-                },
-                error:(err)=>{
-                    console.log(err)
-                },
-                trainingdata
-            })
+    setTrainingDayList(state, value) {
+      state.trainingDayList = value;
+    },
+  },
+  actions: {
+    CREATE_TRAINING(context, { successCallback, errorCallback, trainingdata }) {
+      createTraining({
+        trainingdata,
+        success: (res) => {
+          successCallback && successCallback(res);
         },
-        GET_TRAINING_LIST({commit}){
-            getTraining({
-                success: (res)=>{
-                    commit('setTrainingList',res.data)
-                },
-                error:(err)=>{
-                    console.log(err)
-                }
-            })
-        }
-    }
-}
+        error: (err) => {
+          errorCallback && errorCallback(err);
+        },
+      });
+    },
+    ADD_TASK_TO_DAY(context, { successCallback, errorCallback, payload }) {
+      createDayAndTasks({
+        payload,
+        success: (res) => {
+          successCallback && successCallback(res);
+        },
+        error: (err) => {
+          errorCallback && errorCallback(err);
+        },
+      });
+    },
+    SET_TRAINING_LIST({ commit }, payload) {
+      commit("setTrainingDayList", payload);
+    },
+    GET_TRAINING_LIST({ commit }) {
+      getTraining({
+        success: (res) => {
+          commit("setTrainingList", res.data);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    },
+    GET_TRAINING_BY_ID(
+      context,
+      { successCallback, errorCallback, trainingId }
+    ) {
+      getTrainingById({
+        trainingId,
+        success: (res) => {
+          successCallback && successCallback(res);
+        },
+        error: (err) => {
+          errorCallback && errorCallback(err);
+        },
+      });
+    },
+  },
+};
