@@ -1,27 +1,21 @@
 <template>
-  <div class="card--outer" @click="showTrainingPage(training.id)">
+  <div class="card--outer mb-3" @click="showTrainingPage(training.id)">
     <div class="card--body">
       <img src="@/assets/flag.svg" alt="" srcset="" width="30" />
       <div>
-        <p class="card--title">{{ training.title }}</p>
+        <p class="card--title">{{ training.name }}</p>
       </div>
       <div>
         <p class="card--description">{{ training.description }}</p>
       </div>
       <div class="d-flex gap-2 mt-3">
         <BadgeComponent
-          :label="training.days.length + ' Days'"
+          :label="training.noOfDays + ' Days'"
           class="badge--basic--neon badge--neon--success--outline"
         />
         <BadgeComponent
-          :label="training.tasks.length + ' Tasks'"
-          class="badge--basic--neon badge--neon--warning--outline"
-        />
-      </div>
-      <div class="mt-4">
-        <ButtonComponent
-          label="View Course"
-          class="btn--secondary--outline--sm"
+          :label="training.noOfTasks + ' Tasks'"
+          class="badge--basic--neon badge--warning--outline"
         />
       </div>
     </div>
@@ -29,7 +23,6 @@
 </template>
 <script>
 import BadgeComponent from "@/components/BadgeComponent.vue";
-import ButtonComponent from "@/components/ButtonComponent.vue";
 export default {
   name: "TrainingCard",
   props: {
@@ -40,7 +33,6 @@ export default {
   },
   components: {
     BadgeComponent,
-    ButtonComponent,
   },
   methods: {
     showTrainingPage(id) {

@@ -9,6 +9,11 @@
         <h6 class="training--subtitle">Basic - Vue & UI</h6>
       </div>
       <hr class="hr--training--page my-4" />
+
+      <div class="mb-2"><ButtonComponent 
+      label="Add Day & Task"
+      class="btn--secondary--outline--sm"/></div>
+
       <div class="col-12">
         <div class="row">
           <div class="col-md-8">
@@ -27,6 +32,7 @@
 </template>
 <script>
 import TrainingDaylist from "@/components/TrainingDayList.vue";
+import ButtonComponent from "@/components/ButtonComponent"
 export default {
   name: "TrainingDetailPage",
   data() {
@@ -36,6 +42,7 @@ export default {
   },
   components: {
     TrainingDaylist,
+    ButtonComponent
   },
 };
 </script>

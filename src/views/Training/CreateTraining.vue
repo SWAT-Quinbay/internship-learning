@@ -17,26 +17,54 @@
               label="Training Name"
               class="my-3"
               placeholder="Enter the training name"
+              v-model="trainingdata.name"
             />
             <TextInputComponent
               label="Training Description"
               class="my-3"
               placeholder="Enter the training description"
+              v-model="trainingdata.description"
             />
           </div>
           <div class="col-md-4"></div>
         </div>
+      </div>
+      <div style="max-width:20%;margin-top:10px;">
+        <ButtonComponent
+        label="Create Training" 
+        class="btn--primary--outline p-2"
+        @onClick="addTraining()"/>
       </div>
     </div>
   </div>
 </template>
 <script>
 import TextInputComponent from "@/components/TextInputComponent.vue";
+import ButtonComponent from "@/components/ButtonComponent.vue"
 export default {
   name: "CreateTraining",
+  data(){
+    return{
+      trainingdata:{
+         adminId:3,
+         name: "",
+         description: "",
+      }
+    }
+  },
   components: {
     TextInputComponent,
+    ButtonComponent
   },
+  methods:{
+    addTraining(){
+      console.log(this.trainingdata)
+      let temp={...this.trainingdata}
+      this.$store.dispatch("SET_TRAINING_LIST",temp)
+      this.trainingdata.name=""
+      this.trainingdata.description=""
+    }
+  }
 };
 </script>
 <style scoped>

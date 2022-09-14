@@ -21,32 +21,51 @@
         <ButtonComponent 
         label="Add Training"
         class="btn--primary--outline"
+        @onClick="navigate"
         />
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-3" v-for="training in trainingList" :key="training.id">
-        <TrainingCard :training="training" />
+
+      <div class="col-md-3" v-for="trainingdata in traininglist" :key="trainingdata.id">
+        <!-- {{ trainingdata}} -->
+        <TrainingCard :training="trainingdata" />
       </div>
     </div>
   </div>
 </template>
 <script>
 import TrainingCard from "@/components/TrainingCard.vue";
-import TrainginMockData from "@/utils/training.mock";
+// import TrainginMockData from "@/utils/training.mock";
 import ButtonComponent from "@/components/ButtonComponent.vue"
+import {mapGetters} from "vuex"
 export default {
   name: "TrainingDashboard",
   data() {
     return {
-      trainingList: TrainginMockData,
+      // trainingList: TrainginMockData,
+      //  trainingList: this.traininglist,
     };
+  },
+  methods : {
+    navigate(){
+      this.$router.push({name:"CreateTraining"})
+    }
   },
   components: {
     TrainingCard,
-    ButtonComponent
+    ButtonComponent,
+
   },
+  computed:{
+    ...mapGetters({
+      traininglist:'getTrainingList'
+    })
+  },
+  mounted(){
+    this.$store.dispatch("GET_TRAINING_LIST")
+  }
 };
 </script>
 <style scoped>

@@ -4,8 +4,7 @@
     <input
       :type="type"
       :placeholder="placeholder"
-      :value="value"
-      @input="onInput"
+      :value="value" @input="$emit('input', $event.target.value)"
       class="form--control"
     />
   </div>
