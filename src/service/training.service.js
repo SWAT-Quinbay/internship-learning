@@ -44,3 +44,14 @@ export const getTrainingById = ({ success, error, trainingId }) => {
       error && error(err);
     });
 };
+
+export const getTrainingByDayId = ({ success, error, trainingId, dayId }) => {
+  axios
+    .get(`${BASE_TRAINGING_URL}/training/${trainingId}/day/${dayId}`)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};

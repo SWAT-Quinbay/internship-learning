@@ -3,25 +3,26 @@
     <div class="row">
       <div class="col-12">
         <img src="@/assets/flag.svg" alt="" srcset="" width="40" class="mb-3" />
-        <h4 class="training--title">Frontend Training - Day 2</h4>
+        <h4 class="training--title">{{ trainingName }} - Day {{ dayId }}</h4>
       </div>
       <div class="col-12">
-        <h6 class="training--subtitle">Basic - Vue & UI</h6>
+        <h6 class="training--subtitle">{{ trainingDescription }}</h6>
       </div>
       <hr class="hr--training--page my-4" />
       <div class="col-12">
         <div class="row">
           <div class="col-md-8">
             <TrainingTaskList
-              v-for="(data, index) in 10"
+              v-for="(data, index) in dayTasklist"
               :key="index"
+              :dayTask="data"
               :index="index"
-              :lastIndex="10"
+              :lastIndex="dayTasklist.length"
               @show="show"
             />
           </div>
           <div class="col-md-4">
-            <div class="enrolled--people--card">
+            <!-- <div class="enrolled--people--card">
               <div class="people--card--body">
                 <div class="card--header">
                   <h6 class="card--title">
@@ -68,64 +69,78 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
 
-
-    <div><TaskActionModal v-if="showModal"
-    @close="close"
-    :taskdata="temp"
-    /></div>
+    <div>
+      <TaskActionModal v-if="showModal" @close="close" :taskdata="temp" />
+    </div>
   </div>
 </template>
 <script>
 import TrainingTaskList from "@/components/TrainingTaskList.vue";
-import ButtonComponent from "@/components/ButtonComponent.vue";
-import TextInputComponent from "@/components/TextInputComponent.vue";
-import BadgeComponent from "@/components/BadgeComponent.vue";
-import TaskActionModal from "@/components/TaskActionModal.vue"
-// import {mapGetters} from "vuex"
+// import ButtonComponent from "@/components/ButtonComponent.vue";
+// import TextInputComponent from "@/components/TextInputComponent.vue";
+// import BadgeComponent from "@/components/BadgeComponent.vue";
+import TaskActionModal from "@/components/TaskActionModal.vue";
+// import { mapGetters } from "vuex";
 export default {
   name: "TrainingDayDetailPage",
   data() {
     return {
+      trainingId: this.$route.params.trainingId,
       dayId: this.$route.params.dayId,
-      showModal:false,
-     temp:{
-      id:0,
-      name:"",
-      description:""
-     }
+      trainingName: "",
+      trainingDescription: "",
+      dayTasklist: [],
+      showModal: false,
+      temp: {
+        id: 0,
+        name: "",
+        description: "",
+      },
     };
   },
   components: {
     TrainingTaskList,
-    ButtonComponent,
-    TextInputComponent,
-    BadgeComponent,
-    TaskActionModal
+    // ButtonComponent,
+    // TextInputComponent,
+    // BadgeComponent,
+    TaskActionModal,
   },
-  methods:{
-    show(taskdata){
-      console.log(taskdata)
-      this.temp={...taskdata}
-      this.showModal=true
+  methods: {
+    show(taskdata) {
+      console.log(taskdata);
+      this.temp = { ...taskdata };
+      this.showModal = true;
     },
-     close(){
-      this.showModal=false
-    }
+    close() {
+      this.showModal = false;
+    },
   },
-  //  computed:{
+  // computed: {
   //   ...mapGetters({
-  //     tasklist:'getTask'
-  //   })
+  //     dayTasklist: "getTrainingDayTaskList",
+  //   }),
   // },
-  // created(){
-  //   this.$store.dispatch("GET_TASK")
-  // }
+  created() {
+    this.$store.dispatch("GET_TASK_BY_DAY_AND_TRAINING_ID", {
+      trainingId: this.trainingId,
+      dayId: this.dayId,
+      successCallback: (res) => {
+        this.trainingName = res.data.name;
+        this.trainingDescription = res.data.description;
+        this.dayTasklist = res.data.tasks;
+        // this.$store.dispatch("SET_TRAINING_LIST", res.data);
+      },
+      errorCallback: (err) => {
+        console.log(err);
+      },
+    });
+  },
 };
 </script>
 <style scoped>

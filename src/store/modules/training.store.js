@@ -3,11 +3,13 @@ import {
   createTraining,
   getTrainingById,
   createDayAndTasks,
+  getTrainingByDayId,
 } from "@/service/training.service";
 export default {
   state: {
     trainingList: [],
     trainingDayList: [],
+    trainingDayTaskList: [],
   },
   getters: {
     getTrainingList(state) {
@@ -16,6 +18,9 @@ export default {
     getTrainingDayList(state) {
       return state.trainingDayList;
     },
+    getTrainingDayTaskList(state) {
+      return state.trainingDayTaskList;
+    },
   },
   mutations: {
     setTrainingList(state, value) {
@@ -23,6 +28,9 @@ export default {
     },
     setTrainingDayList(state, value) {
       state.trainingDayList = value;
+    },
+    setTrainingDayTaskList(state, value) {
+      state.trainingDayTaskList = value.tasks;
     },
   },
   actions: {
@@ -51,6 +59,9 @@ export default {
     SET_TRAINING_LIST({ commit }, payload) {
       commit("setTrainingDayList", payload);
     },
+    SET_TRAINING_DAY_TASK_LIST({ commit }, payload) {
+      commit("setTrainingDayTaskList", payload);
+    },
     GET_TRAINING_LIST({ commit }) {
       getTraining({
         success: (res) => {
@@ -67,6 +78,21 @@ export default {
     ) {
       getTrainingById({
         trainingId,
+        success: (res) => {
+          successCallback && successCallback(res);
+        },
+        error: (err) => {
+          errorCallback && errorCallback(err);
+        },
+      });
+    },
+    GET_TASK_BY_DAY_AND_TRAINING_ID(
+      context,
+      { successCallback, errorCallback, trainingId, dayId }
+    ) {
+      getTrainingByDayId({
+        trainingId,
+        dayId,
         success: (res) => {
           successCallback && successCallback(res);
         },
