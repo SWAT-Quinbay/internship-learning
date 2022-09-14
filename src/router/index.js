@@ -12,6 +12,7 @@ import Register from "@/views/SignupPage";
 // import TimerModal from "../components/TimerModal";
 
 // import TrainingRouterPage from "@/views/Training/TrainingRouterPage";
+import CreateTraining from "@/views/Training/CreateTraining";
 import TrainingDashboard from "@/views/Training/TrainingDashboard";
 import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
 import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
@@ -22,8 +23,8 @@ import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
 import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 
 import Employee from "@/views/Admin/Employee";
-import EmployeeRouter from "@/views/Admin/EmployeeRouter"
-import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue"
+import EmployeeRouter from "@/views/Admin/EmployeeRouter";
+import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
 
 Vue.use(Router);
 
@@ -88,6 +89,11 @@ const router = new Router({
               component: TrainingDashboard,
             },
             {
+              path: "create",
+              name: "CreateTraining",
+              component: CreateTraining,
+            },
+            {
               path: ":trainingId",
               component: TrainingDetailRouter,
               children: [
@@ -108,19 +114,18 @@ const router = new Router({
         {
           path: "employee",
           component: EmployeeRouter,
-          children:[
+          children: [
             {
-              path:"",
-              name:"Employee",
-              component:Employee
+              path: "",
+              name: "Employee",
+              component: Employee,
             },
             {
-              path:":employeeId",
-              name:"EmployeeProfile",
-              component:EmployeeProfile
+              path: ":employeeId",
+              name: "EmployeeProfile",
+              component: EmployeeProfile,
             },
-
-          ]
+          ],
         },
       ],
     },
