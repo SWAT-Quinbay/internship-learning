@@ -13,12 +13,12 @@
             <input
               type="text"
               class="action--input"
-               v-model="user.email"
+              v-model="user.email"
               required
             />
           </div>
-          <div class="action--form--controller ">
-     <label for="user-password" class="action--input--label"
+          <div class="action--form--controller">
+            <label for="user-password" class="action--input--label"
               >Enter Password:</label
             >
             <input
@@ -42,7 +42,15 @@
               </div>
             </div>
           </div>
-          <div class="fw-normal text-center" style="cursor:pointer" @click="navigate"><p style="color:#5653ff;font-size:14px">Don't have an account ?</p></div>
+          <div
+            class="fw-normal text-center"
+            style="cursor: pointer"
+            @click="navigate"
+          >
+            <p style="color: #5653ff; font-size: 14px">
+              Don't have an account ?
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -51,61 +59,63 @@
 
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue";
-import {loginUser} from "../service/user.service"
+import { loginUser } from "../service/user.service";
+import { setTokenUserId, setTokenRole, setTokenAuth } from "@/utils/storage";
+import redirectWithRole from "@/utils/redirectWithRole";
 export default {
   name: "LoginPage",
   data() {
     return {
-      user:{
-            email:"",
-            password:"",
-          },
-          UnAuthorized:false
+      user: {
+        email: "",
+        password: "",
+      },
+      UnAuthorized: false,
     };
   },
   components: {
     ButtonComponent,
   },
-  methods:{
-    navigate(){
-      this.$router.push({path:"register"})
+  methods: {
+    navigate() {
+      this.$router.push({ path: "register" });
     },
-    login(){
-      this.UnAuthorized=false
-    loginUser({
-          user:this.user,
-          success:(res)=>{
-            console.log("login",res)
-            if(res.status=="OK")
-            {
-              alert("Login Successfull")
-            }
-            else{
-              this.UnAuthorized=true
-            }
-          },
-          error:(err)=>{
-            console.log(err)
+    login() {
+      this.UnAuthorized = false;
+      loginUser({
+        user: this.user,
+        success: (res) => {
+          console.log("login", res);
+          if (res.data.status == "OK") {
+            setTokenUserId(res.data.id);
+            setTokenRole(res.data.role);
+            setTokenAuth(true);
+            this.$store.dispatch("SET_USER", res.data);
+            redirectWithRole(res.data.role);
+          } else {
+            this.UnAuthorized = true;
           }
-        })
-    }
-  }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .action--input--label {
-display:flex;
-float:left;
-font-size: 14px;
-
+  display: flex;
+  float: left;
+  font-size: 14px;
 }
 
 .action--input {
   width: 100%;
   height: 40px;
- font-weight:500;
+  font-weight: 500;
   border-radius: 10px;
   border: 1px solid #d4d4d4;
   margin-top: 5px;
@@ -130,7 +140,7 @@ font-size: 14px;
   padding: 20px;
   /* box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.06) 0px 2px 4px -1px; */
-    box-shadow:0px 0px 15px 3px #e6e8eb;
+  box-shadow: 0px 0px 15px 3px #e6e8eb;
 }
 
 .login--body {

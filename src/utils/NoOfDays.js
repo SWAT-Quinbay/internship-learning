@@ -31,8 +31,9 @@ export const NoOfDays = [
   { value: 30, label: "Day 30" },
 ];
 
-export const options =[{value:"HR",label:"HR"},
-{value:"BackEndDeveloper",label:"BackEndDeveloper"},
-{value:"UIDeveloper",label:"UIDeveloper"},
-{value:"UXDeveloper",label:"UXDeveloper"}
-]
+export const options = [
+  { value: "HR", label: "HR" },
+  { value: "BackEndDeveloper", label: "BackEnd Developer" },
+  { value: "UIDeveloper", label: "UI Developer" },
+  { value: "UXDeveloper", label: "UX Developer" },
+];

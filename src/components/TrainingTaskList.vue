@@ -67,7 +67,7 @@
                 <ButtonComponent
                   label="Delete"
                   class="btn--secondary--outline--sm"
-                   @onClick="deletemodal(dayTask)"
+                  @onClick="deletemodal(dayTask)"
                 />
               </div>
             </div>
@@ -86,15 +86,12 @@ export default {
   props: {
     index: {
       type: Number,
-      required: true,
     },
     dayTask: {
       type: Object,
-      required: true,
     },
     lastIndex: {
       type: Number,
-      required: true,
     },
   },
   components: {
@@ -111,9 +108,9 @@ export default {
     show(dayTask) {
       this.$emit("show", dayTask);
     },
-    deletemodal(dayTask){
-      this.$emit("showDelete",dayTask)
-    }
+    deletemodal(dayTask) {
+      this.$emit("showDelete", dayTask);
+    },
   },
 };
 </script>

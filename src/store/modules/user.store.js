@@ -2,17 +2,24 @@ export default {
   state: {
     user: {
       id: "",
-      name: "",
-      role: "USER",
+      role: "",
       verified: false,
-      email: "",
     },
   },
   getters: {
-    getUserFromState: (state) => {
+    getUser: (state) => {
       return state.user;
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    setUser(state, user) {
+      state.user.id = user.id;
+      state.user.role = user.role;
+    },
+  },
+  actions: {
+    SET_USER: ({ commit }, user) => {
+      commit("setUser", user);
+    },
+  },
 };

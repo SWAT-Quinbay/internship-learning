@@ -21,31 +21,24 @@ export default {
   props: {
     labelFor: {
       type: String,
-      required: true,
     },
     label: {
       type: String,
-      required: true,
     },
     options: {
       type: Array,
-      required: true,
     },
     nullValueName: {
       type: String,
-      required: true,
     },
     value: {
       type: String,
-      required: true,
     },
     type: {
       type: String,
-      required: true,
     },
     disabled: {
       type: Boolean,
-      required: true,
     },
   },
 };

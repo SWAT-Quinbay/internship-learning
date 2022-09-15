@@ -37,3 +37,9 @@ export const setTokenAuth = (value) => {
 export const deleteTokenAuth = () => {
   localStorage.removeItem(TOKEN_AUTH);
 };
+
+export const deleteAllToken = () => {
+  deleteTokenAuth();
+  deleteTokenRole();
+  deleteTokenUserId();
+};

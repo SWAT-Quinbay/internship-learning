@@ -3,7 +3,7 @@ import Router from "vue-router";
 
 import LoginPage from "@/views/LoginPage";
 import ErrorPage from "@/views/ErrorPage.vue";
-import Register from "@/views/Register";
+import RegisterComponent from "@/views/RegisterComponent";
 import CreateTraining from "@/views/Training/CreateTraining";
 import TrainingDashboard from "@/views/Training/TrainingDashboard";
 import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
@@ -11,7 +11,7 @@ import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
 import CreateDay from "@/views/Training/CreateDay";
 import TrainingDashboardRouter from "@/views/Training/TrainingDashboardRouter";
 import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
-import OtpPage from "../views/OtpPage"
+import OtpPage from "../views/OtpPage";
 import EmployeeDashboardRouter from "@/views/Employee/EmployeeDashboardRouter";
 import EmployeeDashboard from "@/views/Employee/EmployeeDashboard";
 import EmployeeTrainingDetailRouter from "@/views/Employee/EmployeeTrainingDetailRouter";
@@ -24,7 +24,15 @@ import Employee from "@/views/Admin/Employee";
 import EmployeeRouter from "@/views/Admin/EmployeeRouter";
 import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
 
-// import { getToken } from "@/utils/storage";
+import {
+  getTokenRole,
+  getTokenAuth,
+  getTokenUserId,
+  // deleteTokenAuth,
+  // deleteTokenRole,
+  // deleteTokenUserId,
+} from "@/utils/storage";
+import redirectWithRole from "@/utils/redirectWithRole";
 
 Vue.use(Router);
 
@@ -34,9 +42,7 @@ const router = new Router({
   routes: [
     {
       path: "/",
-      redirect: () => {
-        return { name: "LoginPage" };
-      },
+      redirect: "/login",
     },
     {
       path: "/login",
@@ -45,8 +51,8 @@ const router = new Router({
     },
     {
       path: "/register",
-      name: "Register",
-      component: Register,
+      name: "RegisterComponent",
+      component: RegisterComponent,
     },
     {
       path: "/verify",
@@ -79,11 +85,15 @@ const router = new Router({
           ],
         },
       ],
+      beforeEnter: (to, from, next) => {
+        checkValidation("USER", next);
+      },
     },
 
     {
       path: "/admin",
       component: AdminRouterPage,
+      redirect: "/admin/training",
       children: [
         {
           path: "training",
@@ -139,9 +149,9 @@ const router = new Router({
           ],
         },
       ],
-      // beforeEnter: (to, from, next) => {
-      //   checkValidation("ADMIN", next);
-      // },
+      beforeEnter: (to, from, next) => {
+        checkValidation("ADMIN", next);
+      },
     },
     {
       path: "*",
@@ -151,27 +161,24 @@ const router = new Router({
   ],
 });
 
-// const checkValidation = (role, next) => {
-//   const token = getToken();
-//   if (token) {
-//     const user = JSON.parse(btoa(token.split(".")[1]));
-//     if (user.role === role) {
-//       next();
-//     } else {
-//       next({ name: "ErrorPage" });
-//     }
-//   } else {
-//     next({ name: "LoginPage" });
-//   }
-// }
+const checkValidation = (role, next) => {
+  if (getTokenAuth() == "true" && getTokenRole() == role) {
+    next();
+  } else if (getTokenAuth() == "true" && getTokenRole() != role) {
+    redirectWithRole(getTokenRole());
+  } else {
+    next({ name: "LoginPage" });
+  }
+};
 
-// router.afterEach((to) => {
-//   const token = getToken();
-//   if (token) {
-//     if (to.name !== "LoginPage") {
-//       router.replace("/");
-//     }
-//   }
-// });
+router.afterEach((to, next) => {
+  if (getTokenUserId() && getTokenAuth() == "true") {
+    if (to.name === "LoginPage") {
+      redirectWithRole(getTokenRole());
+    }
+  } else {
+    next({ name: "LoginPage" });
+  }
+});
 
 export default router;

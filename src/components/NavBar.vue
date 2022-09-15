@@ -68,7 +68,7 @@
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
-// import { deleteToken } from "@/utils/storage";
+import { deleteAllToken } from "@/utils/storage";
 import { mapGetters } from "vuex";
 // import BadgeComponent from "@/components/BadgeComponent.vue";
 
@@ -100,14 +100,13 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "getUserFromState",
+      user: "getUser",
     }),
   },
   methods: {
     logout() {
-      this.$store.dispatch("LOGOUT_USER");
-      // deleteToken();
-      this.$router.replace("/");
+      deleteAllToken();
+      this.$router.replace("/login");
     },
   },
 };
