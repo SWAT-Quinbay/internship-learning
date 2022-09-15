@@ -1,34 +1,27 @@
 <template>
   <div class="container pt-5">
-
     <div class="d-flex gap-3 align-items-center">
       <div class="p-2 w-100">
-         <div class="action--form--controller">
-            <input
-              type="text"
-              class="action--input"
-              required
-            />
-          </div>
+        <TextInputComponent class="my-3" placeholder="Search for training" />
       </div>
-      <div class="p-2 w-25 ">
-        <ButtonComponent 
-        label="Search"
-        class="btn--primary"
-        />
+      <div class="p-2 w-25">
+        <ButtonComponent label="Search" class="btn--primary--sm--100" />
       </div>
-      <div class="p-2 w-25 ">
-        <ButtonComponent 
-        label="Add Training"
-        class="btn--primary--outline"
-        @onClick="navigate"
+      <div class="p-2 w-25">
+        <ButtonComponent
+          label="Add Training"
+          class="btn--primary--sm--outline"
+          @onClick="navigate"
         />
       </div>
     </div>
 
     <div class="row">
-
-      <div class="col-md-3" v-for="trainingdata in traininglist" :key="trainingdata.id">
+      <div
+        class="col-md-3"
+        v-for="trainingdata in traininglist"
+        :key="trainingdata.id"
+      >
         <!-- {{ trainingdata}} -->
         <TrainingCard :training="trainingdata" />
       </div>
@@ -38,8 +31,9 @@
 <script>
 import TrainingCard from "@/components/TrainingCard.vue";
 // import TrainginMockData from "@/utils/training.mock";
-import ButtonComponent from "@/components/ButtonComponent.vue"
-import {mapGetters} from "vuex"
+import ButtonComponent from "@/components/ButtonComponent.vue";
+import TextInputComponent from "@/components/TextInputComponent.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "TrainingDashboard",
   data() {
@@ -48,32 +42,31 @@ export default {
       //  trainingList: this.traininglist,
     };
   },
-  methods : {
-    navigate(){
-      this.$router.push({name:"CreateTraining"})
-    }
+  methods: {
+    navigate() {
+      this.$router.push({ name: "CreateTraining" });
+    },
   },
   components: {
     TrainingCard,
     ButtonComponent,
-
+    TextInputComponent,
   },
-  computed:{
+  computed: {
     ...mapGetters({
-      traininglist:'getTrainingList'
-    })
+      traininglist: "getTrainingList",
+    }),
   },
-  mounted(){
-    this.$store.dispatch("GET_TRAINING_LIST")
-  }
+  mounted() {
+    this.$store.dispatch("GET_TRAINING_LIST");
+  },
 };
 </script>
 <style scoped>
-
 .action--input {
   width: 100%;
   height: 40px;
- font-weight:500;
+  font-weight: 500;
   border-radius: 10px;
   border: 1px solid #d4d4d4;
 
@@ -87,4 +80,5 @@ export default {
 
 .d-flex {
   margin-bottom: 27px;
-}</style>
+}
+</style>

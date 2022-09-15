@@ -2,17 +2,15 @@
   <div class="container pt-5">
     <div class="d-flex gap-3 align-items-center">
       <div class="p-2 w-100">
-        <div class="action--form--controller">
-          <input type="text" class="action--input" required />
-        </div>
+        <TextInputComponent class="my-3" placeholder="Search for training" />
       </div>
       <div class="p-2 w-25">
-        <ButtonComponent label="Search" class="btn--primary" />
+        <ButtonComponent label="Search" class="btn--primary--sm--100" />
       </div>
       <div class="p-2 w-25">
         <ButtonComponent
           label="Add Training"
-          class="btn--primary--outline"
+          class="btn--primary--sm--outline"
           @onClick="navigate"
         />
       </div>
@@ -33,6 +31,7 @@
 <script>
 import TrainingCard from "@/components/TrainingCard.vue";
 // import TrainginMockData from "@/utils/training.mock";
+import TextInputComponent from "@/components/TextInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import { mapGetters } from "vuex";
 export default {
@@ -51,6 +50,7 @@ export default {
   components: {
     TrainingCard,
     ButtonComponent,
+    TextInputComponent,
   },
   computed: {
     ...mapGetters({

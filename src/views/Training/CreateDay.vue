@@ -1,5 +1,4 @@
 <template>
-
   <div class="container py-5">
     <div class="row">
       <div class="col-4">
@@ -73,13 +72,13 @@
                   :name="'taskType' + index"
                   value="Link"
                   v-model="tasks[index].type"
-                />Submit
+                />Link
                 <input
                   type="radio"
                   :name="'taskType' + index"
                   value="Submit"
                   v-model="tasks[index].type"
-                />Link
+                />Submit
               </div>
             </div>
             <ButtonComponent
