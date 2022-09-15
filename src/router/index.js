@@ -3,7 +3,7 @@ import Router from "vue-router";
 
 import LoginPage from "@/views/LoginPage";
 import ErrorPage from "@/views/ErrorPage.vue";
-import Register from "@/views/SignupPage";
+import Register from "@/views/Register";
 import CreateTraining from "@/views/Training/CreateTraining";
 import TrainingDashboard from "@/views/Training/TrainingDashboard";
 import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
@@ -11,6 +11,9 @@ import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
 import CreateDay from "@/views/Training/CreateDay";
 import TrainingDashboardRouter from "@/views/Training/TrainingDashboardRouter";
 import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
+import OtpPage from "../views/OtpPage"
+import EmployeeDashboardRouter from "@/views/Employee/EmployeeDashboardRouter";
+import EmployeeDashboard from "@/views/Employee/EmployeeDashboard";
 
 import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 
@@ -41,6 +44,22 @@ const router = new Router({
       path: "/register",
       name: "Register",
       component: Register,
+    },
+    {
+      path: "/verify",
+      name: "OtpPage",
+      component: OtpPage,
+    },
+    {
+      path: "/mytrainings",
+      component: EmployeeDashboardRouter,
+      children: [
+        {
+          path: "",
+          name: "EmployeeDashboard",
+          component: EmployeeDashboard,
+        },
+      ],
     },
 
     {

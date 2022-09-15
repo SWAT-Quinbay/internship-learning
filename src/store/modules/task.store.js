@@ -1,4 +1,4 @@
-import { getTasks } from "@/service/task.service";
+// import { getTasks } from "@/service/task.service";
 
 
 export default {
@@ -21,16 +21,16 @@ export default {
         // SET_TASK({commit},value){
         //     commit("setTask",value)
         // },
-        GET_TASK({commit}){
-            getTasks({
-                success:(res)=>{
-                    commit("setTask",res.data)
-                },
-                error:(err)=>{
-                    console.log(err)
-                }
-            })
-        }
+        // GET_TASK({commit}){
+        //     getTasks({
+        //         success:(res)=>{
+        //             commit("setTask",res.data)
+        //         },
+        //         error:(err)=>{
+        //             console.log(err)
+        //         }
+        //     })
+        // }
     }
 
 }

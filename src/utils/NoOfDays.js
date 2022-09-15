@@ -1,4 +1,4 @@
-export default [
+export const NoOfDays = [
   { value: 1, label: "Day 1" },
   { value: 2, label: "Day 2" },
   { value: 3, label: "Day 3" },
@@ -30,3 +30,9 @@ export default [
   { value: 29, label: "Day 29" },
   { value: 30, label: "Day 30" },
 ];
+
+export const options =[{value:"HR",label:"HR"},
+{value:"BackEndDeveloper",label:"BackEndDeveloper"},
+{value:"UIDeveloper",label:"UIDeveloper"},
+{value:"UXDeveloper",label:"UXDeveloper"}
+]

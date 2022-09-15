@@ -13,7 +13,7 @@
             <input
               type="text"
               class="action--input"
-              
+               v-model="user.email"
               required
             />
           </div>
@@ -24,7 +24,7 @@
             <input
               type="password"
               class="action--input"
-              
+              v-model="user.password"
             />
           </div>
           <span v-if="UnAuthorized" style="color: red; text-align: center"
@@ -37,6 +37,7 @@
                   label="Login"
                   class="btn--primary"
                   type="button"
+                  @onClick="login()"
                 />
               </div>
             </div>
@@ -50,10 +51,17 @@
 
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue";
+import {loginUser} from "../service/user.service"
 export default {
   name: "LoginPage",
   data() {
-    return {};
+    return {
+      user:{
+            email:"",
+            password:"",
+          },
+          UnAuthorized:false
+    };
   },
   components: {
     ButtonComponent,
@@ -61,6 +69,25 @@ export default {
   methods:{
     navigate(){
       this.$router.push({path:"register"})
+    },
+    login(){
+      this.UnAuthorized=false
+    loginUser({
+          user:this.user,
+          success:(res)=>{
+            console.log("login",res)
+            if(res.status=="OK")
+            {
+              alert("Login Successfull")
+            }
+            else{
+              this.UnAuthorized=true
+            }
+          },
+          error:(err)=>{
+            console.log(err)
+          }
+        })
     }
   }
 };
