@@ -11,7 +11,7 @@
           <span class="close" @click="closeModal">&times;</span>
         </div>
       </div>
-<!-- {{taskdata}} -->
+<!-- {{task}} -->
         <div class="modal--content">
              <div class="action--form--controller">
             <label class="action--input--label"
@@ -31,19 +31,19 @@
             >
             <textarea
               type="text"
-              class="action--input h-100"
+              class="action--input "
               min="20"
+              rows="7"
               v-model="task.description">
             </textarea>
           </div>
 
           <label for="link" class="action--input--label mt-0">Choose Submission type:</label><br>
           <div class="d-flex gap-2 ml-4 action--input--label  mt-2">
-          <input type="radio" name="taskType" v-model="task.taskType" value="submit" />Submit
-          <input type="radio" name="taskType" v-model="task.taskType" value="link"/>Link
+          <input type="radio" name="taskType" v-model="task.type" value="Submit" />Submit
+          <input type="radio" name="taskType" v-model="task.type" value="Link"/>Link
           </div>
-          
- 
+
         </div>
 
 
@@ -61,7 +61,7 @@
             <ButtonComponent
               label="Save"
               class="btn--primary--ps"
-
+              @onClick="edittask()"
               type="button"
             />
           </div>
@@ -72,15 +72,13 @@
 
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue"
+import {editTaskById} from "../service/training.service"
 export default{
     name:"TaskActionModal",
     data(){
       return{
         task:{
-          name:"",
-          description:"",
-          day:"",
-          inputtype:""
+          ...this.taskdata
         }
       }
     },
@@ -90,16 +88,35 @@ export default{
     methods:{
       closeModal(){
         this.$emit("close")
+      },
+      edittask(){
+          editTaskById({
+            payload:{...this.task,dayName:this.dayid,trainingId:this.trainingid},
+            success:(res)=>{
+              console.log(res)
+              this.$emit("close")
+            },
+            error:(err)=>{
+              console.log(err)
+            }
+          })
       }
     },
     props:{
       taskdata:{
         type:Object,
+      },
+      dayid:{
+        type:String,
+      },
+      trainingid:{
+        type:String
       }
     },
     created(){
       this.task.name=this.taskdata.name;
       this.task.description=this.taskdata.description;
+      this.task.type=this.taskdata.type
     }
 }
 </script>

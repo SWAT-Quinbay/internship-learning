@@ -97,7 +97,7 @@
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import SelectInputComponent from "@/components/SelectInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
-import NoOfDays from "@/utils/NoOfDays";
+import {NoOfDays} from "@/utils/NoOfDays";
 export default {
   name: "CreateDay",
   data() {

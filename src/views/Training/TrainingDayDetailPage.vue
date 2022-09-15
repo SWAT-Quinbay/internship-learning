@@ -19,74 +19,38 @@
               :index="index"
               :lastIndex="dayTasklist.length"
               @show="show"
+              @showDelete="showdelete"
             />
           </div>
-          <div class="col-md-4">
-            <!-- <div class="enrolled--people--card">
-              <div class="people--card--body">
-                <div class="card--header">
-                  <h6 class="card--title">
-                    Training assigned for
-                    <BadgeComponent
-                      :label="25 + ' People'"
-                      class="badge--basic--neon badge--neon--success--outline"
-                    />
-                  </h6>
-                </div>
-                <div class="search--bar mb-2">
-                  <div class="row align-items-center">
-                    <div class="col-8 pe-0">
-                      <TextInputComponent
-                        class="my-3"
-                        placeholder="Enter the user name"
-                      />
-                    </div>
-                    <div class="col-4">
-                      <ButtonComponent
-                        label="Search"
-                        class="btn--primary--sm--100"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div class="people--list">
-                  <div
-                    class="people--card"
-                    v-for="(data, index) in 25"
-                    :key="index"
-                  >
-                    <div class="row align-items-center justify-content-between">
-                      <div class="col-9">
-                        <p class="people--name">John Doe</p>
-                      </div>
-                      <div class="col-3">
-                        <ButtonComponent
-                          label="Remove"
-                          class="btn--danger--sm--fx"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-          </div>
+          <div class="col-md-4"></div>
         </div>
       </div>
     </div>
 
     <div>
-      <TaskActionModal v-if="showModal" @close="close" :taskdata="temp" />
+      <TaskActionModal
+        v-if="showModal"
+        @close="close"
+        :taskdata="temp"
+        :dayid="dayId"
+        :trainingid="trainingId"
+      />
+      <DeleteModal
+        v-if="showDeleteModal"
+        @closeModal="closedelete"
+        :taskdata="task_to_be_deleted"
+        :dayid="dayId"
+        :trainingid="trainingId"
+      />
     </div>
   </div>
 </template>
 <script>
 import TrainingTaskList from "@/components/TrainingTaskList.vue";
-// import ButtonComponent from "@/components/ButtonComponent.vue";
-// import TextInputComponent from "@/components/TextInputComponent.vue";
-// import BadgeComponent from "@/components/BadgeComponent.vue";
+import DeleteModal from "@/components/DeleteModal.vue";
+
 import TaskActionModal from "@/components/TaskActionModal.vue";
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   name: "TrainingDayDetailPage",
   data() {
@@ -97,19 +61,15 @@ export default {
       trainingDescription: "",
       dayTasklist: [],
       showModal: false,
-      temp: {
-        id: 0,
-        name: "",
-        description: "",
-      },
+      showDeleteModal: false,
+      temp: {},
+      task_to_be_deleted: {},
     };
   },
   components: {
     TrainingTaskList,
-    // ButtonComponent,
-    // TextInputComponent,
-    // BadgeComponent,
     TaskActionModal,
+    DeleteModal,
   },
   methods: {
     show(taskdata) {
@@ -120,12 +80,19 @@ export default {
     close() {
       this.showModal = false;
     },
+    closedelete() {
+      this.showDeleteModal = false;
+    },
+    showdelete(dayTask) {
+      this.showDeleteModal = true;
+      this.task_to_be_deleted = { ...dayTask };
+    },
   },
-  // computed: {
-  //   ...mapGetters({
-  //     dayTasklist: "getTrainingDayTaskList",
-  //   }),
-  // },
+  computed: {
+    ...mapGetters({
+      dayTasklist: "getTrainingDayTaskList",
+    }),
+  },
   created() {
     this.$store.dispatch("GET_TASK_BY_DAY_AND_TRAINING_ID", {
       trainingId: this.trainingId,
@@ -134,7 +101,6 @@ export default {
         this.trainingName = res.data.name;
         this.trainingDescription = res.data.description;
         this.dayTasklist = res.data.tasks;
-        // this.$store.dispatch("SET_TRAINING_LIST", res.data);
       },
       errorCallback: (err) => {
         console.log(err);

@@ -11,7 +11,7 @@ import TrainingDayDetailPage from "@/views/Training/TrainingDayDetailPage";
 import CreateDay from "@/views/Training/CreateDay";
 import TrainingDashboardRouter from "@/views/Training/TrainingDashboardRouter";
 import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
-
+import OtpPage from "../views/OtpPage"
 import EmployeeDashboardRouter from "@/views/Employee/EmployeeDashboardRouter";
 import EmployeeDashboard from "@/views/Employee/EmployeeDashboard";
 
@@ -44,6 +44,11 @@ const router = new Router({
       path: "/register",
       name: "Register",
       component: Register,
+    },
+    {
+      path: "/verify",
+      name: "OtpPage",
+      component: OtpPage,
     },
     {
       path: "/mytrainings",

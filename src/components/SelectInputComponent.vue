@@ -52,7 +52,6 @@ export default {
   border-radius: 10px;
   padding: 6px 10px;
   width: fit-content;
-  padding-right: 20px;
 }
 
 .form--control::placeholder {

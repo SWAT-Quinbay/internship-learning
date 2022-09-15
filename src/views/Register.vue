@@ -6,50 +6,39 @@
           <center>
             <h4 class="login--header">SIGN UP</h4>
           </center>
-           <div class="action--form--controller">
-            <label for="user-name" class="action--input--label"
-              >Enter Name:</label
-            >
-            <input
-              type="text"
-              class="action--input"
-              placeholder="Enter Your Name"
-              required
-            />
-          </div>
-          <div class="action--form--controller">
-            <label for="user-name" class="action--input--label"
-              >Enter Email:</label
-            >
-            <input
-              type="text"
-              class="action--input"
-              placeholder="Enter Your Email"
-              required
-            />
-          </div>
-          <div class="action--form--controller">
-            <label for="user-password" class="action--input--label"
-              >Enter Password:</label
-            >
-            <input
-              type="password"
-             
-              class="action--input"
-              placeholder="Enter Your Password"
-            />
-          </div>
+       <div class="row">   <TextInputComponent class=" col-6 "
+          label="Enter Name"
+          type="text"
+          placeholder="Enter Name"
+          v-model="user.name"
+          />
+           <SelectInputComponent class="col-6"
+          :options="options"
+          label="Choose Designation"
+          v-model="user.designation"
+          />
+       </div>
+             <TextInputComponent class="my-3"
+          label="Enter Email"
+          type="text"
+          placeholder="Enter Email"
+          v-model="user.email"
+          />
+         
 
-          <div class="action--form--controller">
-            <label for="user-password" class="action--input--label"
-              >Re-Enter Password:</label
-            >
-            <input
-              type="password"
-              class="action--input"
-              placeholder="Re-Enter Password"
-            />
-          </div>
+           <!-- <TextInputComponent class="my-3"
+          label="Enter Password"
+          type="Password"
+          placeholder="Enter Password"
+          v-model="user.password"
+          />
+
+           <TextInputComponent class="my-3"
+          label="Re-Enter Password"
+          type="Password"
+          placeholder="Re-Enter Password"
+          /> -->
+
           <span v-if="UnAuthorized" style="color: red; text-align: center"
             >Wrong Credentials! Acces Denied.</span
           ><div class="login--button">
@@ -59,7 +48,7 @@
             <ButtonComponent
             label="Sign Up"
             class="btn--primary"
-           
+           @onClick="registeruser()"
             type="button"
           />
             </div>
@@ -73,17 +62,53 @@
 
 <script>
 import ButtonComponent from "../components/ButtonComponent.vue"
+import TextInputComponent from "../components/TextInputComponent.vue"
+import SelectInputComponent from "../components/SelectInputComponent.vue"
+import {registerUser} from "../service/user.service"
+import {options} from "@/utils/NoOfDays";
+
 export default{
     name:"SignupPage",
     data()
     {
         return{
-
+          options,
+          user:{
+            name:"",
+            email:"",
+            // password:"",
+            designation:""
+          }
         }
     },
     components:{
         ButtonComponent,
+        TextInputComponent,
+        SelectInputComponent
+    },
+    methods:{
+      registeruser(){
+        registerUser({
+          user:this.user,
+          success:(res)=>{
+            console.log("register",res)
+            if(res.status=="OK")
+            {
+              this.$router.push({name:"LoginPage"})
+            }
+            else{
+              alert("try again!!")
+            }
+          },
+          error:(err)=>{
+            console.log(err)
+          }
+        })
+
+        // this.$router.push({name:"OtpPage"})
+      }
     }
+
 }
 </script>
 

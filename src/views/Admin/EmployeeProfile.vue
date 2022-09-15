@@ -14,6 +14,7 @@
     <div class="container col-7">
         <div class="d-flex gap-4 p-3 pb-0 mb-0"><p class="heading--text">Trainings Assigned</p>
         </div>
+        <!-- <div class="card col-3 "></div> -->
     </div>
   </div>
 </template>

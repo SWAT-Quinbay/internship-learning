@@ -62,11 +62,12 @@
                 <ButtonComponent
                   label="Edit"
                   class="btn--secondary--outline--sm"
-                  @onClick="show"
+                  @onClick="show(dayTask)"
                 />
                 <ButtonComponent
                   label="Delete"
                   class="btn--secondary--outline--sm"
+                   @onClick="deletemodal(dayTask)"
                 />
               </div>
             </div>
@@ -107,9 +108,12 @@ export default {
         params: { dayId: id },
       });
     },
-    show() {
-      this.$emit("show", { id: 2, name: "task1", description: "sdfghj" });
+    show(dayTask) {
+      this.$emit("show", dayTask);
     },
+    deletemodal(dayTask){
+      this.$emit("showDelete",dayTask)
+    }
   },
 };
 </script>
