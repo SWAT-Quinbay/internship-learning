@@ -54,6 +54,8 @@
             </div>
           </div>
           </div>
+ <div class="fw-normal text-center" style="cursor:pointer" @click="navigate"><p style="color:#5653ff;font-size:14px">Already have an account ?</p></div>
+
         </div>
       </div>
     </div>
@@ -87,6 +89,9 @@ export default{
         SelectInputComponent
     },
     methods:{
+       navigate(){
+      this.$router.push({path:"login"})
+    },
       registeruser(){
         registerUser({
           user:this.user,
@@ -156,7 +161,7 @@ font-weight:500;
 }
 
 .login--header {
-  color: #655dff;
+  color: black;
   padding-top: 5px;
   font-style: bold;
   margin-bottom: 25px;
