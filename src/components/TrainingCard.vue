@@ -23,6 +23,7 @@
 </template>
 <script>
 import BadgeComponent from "@/components/BadgeComponent.vue";
+import { mapGetters } from "vuex";
 export default {
   name: "TrainingCard",
   props: {
@@ -34,12 +35,24 @@ export default {
   components: {
     BadgeComponent,
   },
+  computed: {
+    ...mapGetters({
+      user: "getUserFromState",
+    }),
+  },
   methods: {
     showTrainingPage(id) {
-      this.$router.push({
-        name: "TrainingDetailPage",
-        params: { trainingId: id },
-      });
+      if (this.user.role === "ADMIN") {
+        this.$router.push({
+          name: "TrainingDetailPage",
+          params: { trainingId: id },
+        });
+      } else {
+        this.$router.push({
+          name: "EmployeeTrainingDetailPage",
+          params: { trainingId: id },
+        });
+      }
     },
   },
 };

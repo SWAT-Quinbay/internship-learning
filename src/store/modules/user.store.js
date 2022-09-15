@@ -3,11 +3,10 @@ export default {
     user: {
       id: "",
       name: "",
-      role: "ADMIN",
+      role: "USER",
       verified: false,
       email: "",
     },
-    
   },
   getters: {
     getUserFromState: (state) => {

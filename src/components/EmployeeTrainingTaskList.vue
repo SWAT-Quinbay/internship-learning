@@ -20,31 +20,24 @@
                 alt="checkbox"
                 width="25"
                 :class="
-                  (index + 1) % 2 == 0
+                  dayTask.status
                     ? 'check--logo--completed'
                     : 'check--logo--incompleted'
                 "
               />
             </div>
             <div class="col-auto">
-              <p class="day--title">Day {{ trainingDay.name }}</p>
+              <p class="day--title">{{ dayTask.name }}</p>
             </div>
           </div>
         </div>
         <div class="col-auto">
           <ButtonComponent
-            label="View Task Details"
+            label="View Details"
             class="btn--secondary--outline--sm"
-            @onClick="showTaskPage(trainingDay.name)"
+            data-bs-toggle="collapse"
+            :data-bs-target="'#collapseExample' + index"
           />
-          <span class="mx-2 ms-3">
-            <font-awesome-icon
-              class="icon--arrow--right"
-              icon="fa-solid fa-chevron-down"
-              data-bs-toggle="collapse"
-              :data-bs-target="'#collapseExample' + index"
-            />
-          </span>
         </div>
       </div>
     </div>
@@ -52,25 +45,33 @@
     <div class="collapse" :id="'collapseExample' + index">
       <div class="p-3">
         <div class="card card-body">
-          <div
-            class="row align-items-center my-1"
-            v-for="(data, index) in trainingDay.tasks"
-            :key="index"
-          >
-            <div class="col-auto">
-              <img
-                src="@/assets/check.png"
-                alt="checkbox"
-                width="18"
-                :class="
-                  data.status
-                    ? 'check--logo--completed'
-                    : 'check--logo--incompleted'
-                "
-              />
+          <div class="row align-items-center my-1">
+            <div class="col-12">
+              <p class="task--title">Task Description:</p>
+              <p class="task--description">
+                {{ dayTask.description }}
+              </p>
             </div>
-            <div class="col-10 px-0">
-              <p class="task--title">{{ data.name }}</p>
+            <div class="col-12 mt-4">
+              <p class="task--title mb-2">Task Submission:</p>
+              <div class="row align-items-center">
+                <div class="col-12" v-if="dayTask.type == 'Link'">
+                  <TextInputComponent
+                    placeholder="Paste the assignment link here"
+                    v-model="taskLink"
+                  />
+                  <ButtonComponent
+                    label="Submit"
+                    class="btn--primary--sm mt-2"
+                  />
+                </div>
+                <div class="col-12" v-else>
+                  <ButtonComponent
+                    label="Set as complete"
+                    class="btn--primary--sm mt-2"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -80,16 +81,23 @@
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
-import { mapGetters } from "vuex";
+// import BadgeComponent from "@/components/BadgeComponent.vue";
+import TextInputComponent from "@/components/TextInputComponent.vue";
+// import {mapGetters} from "vuex"
 export default {
-  name: "TrainingDaylist",
+  name: "EmployeeTrainingTaskList",
+  data() {
+    return {
+      taskLink: "",
+    };
+  },
   props: {
-    trainingDay: {
-      type: Object,
-      default: () => {},
-    },
     index: {
       type: Number,
+      required: true,
+    },
+    dayTask: {
+      type: Object,
       required: true,
     },
     lastIndex: {
@@ -99,25 +107,18 @@ export default {
   },
   components: {
     ButtonComponent,
-  },
-  computed: {
-    ...mapGetters({
-      user: "getUserFromState",
-    }),
+    // BadgeComponent,
+    TextInputComponent,
   },
   methods: {
     showTaskPage(id) {
-      if (this.user.role === "ADMIN") {
-        this.$router.push({
-          name: "TrainingDayDetailPage",
-          params: { dayId: id },
-        });
-      } else {
-        this.$router.push({
-          name: "EmployeeTrainingDayDetailPage",
-          params: { dayId: id },
-        });
-      }
+      this.$router.push({
+        name: "TrainingDayDetailPage",
+        params: { dayId: id },
+      });
+    },
+    show() {
+      this.$emit("show", { id: 2, name: "task1", description: "sdfghj" });
     },
   },
 };
@@ -149,14 +150,21 @@ export default {
   cursor: pointer;
 }
 
+.task--title {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.task--description {
+  font-size: 14px;
+}
+
 .card--list {
   /* background-color: #f1f1f1; */
   /* border: 1px solid rgb(229, 229, 229); */
   padding: 12px;
-}
-
-.task--title {
-  margin: 0px;
 }
 
 .day--title {

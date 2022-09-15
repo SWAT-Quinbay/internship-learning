@@ -15,12 +15,12 @@ export const NavBarUserRoutes = {
   role: "USER",
   routes: [
     {
-      name: "Training",
+      name: "EmployeeDashboard",
       label: "Training",
     },
-    {
-      name: "Profile",
-      label: "Profile",
-    },
+    // {
+    //   name: "Profile",
+    //   label: "Profile",
+    // },
   ],
 };

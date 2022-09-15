@@ -14,6 +14,9 @@ import TrainingDetailRouter from "@/views/Training/TrainingDetailRouter";
 
 import EmployeeDashboardRouter from "@/views/Employee/EmployeeDashboardRouter";
 import EmployeeDashboard from "@/views/Employee/EmployeeDashboard";
+import EmployeeTrainingDetailRouter from "@/views/Employee/EmployeeTrainingDetailRouter";
+import EmployeeTrainingDetailPage from "@/views/Employee/EmployeeTrainingDetailPage";
+import EmployeeTrainingDayDetailPage from "@/views/Employee/EmployeeTrainingDayDetailPage";
 
 import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 
@@ -53,6 +56,22 @@ const router = new Router({
           path: "",
           name: "EmployeeDashboard",
           component: EmployeeDashboard,
+        },
+        {
+          path: ":trainingId",
+          component: EmployeeTrainingDetailRouter,
+          children: [
+            {
+              path: "",
+              name: "EmployeeTrainingDetailPage",
+              component: EmployeeTrainingDetailPage,
+            },
+            {
+              path: ":dayId",
+              name: "EmployeeTrainingDayDetailPage",
+              component: EmployeeTrainingDayDetailPage,
+            },
+          ],
         },
       ],
     },

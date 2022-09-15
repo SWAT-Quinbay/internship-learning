@@ -8,7 +8,7 @@
       @input="$emit('input', $event.target.value)"
       class="form--control"
     >
-      <option :value="null" :key="-1">Select Day</option>
+      <option :value="null" :key="-1">{{ nullValueName }}</option>
       <option v-for="(item, index) in options" :value="item.value" :key="index">
         {{ item.label }}
       </option>
@@ -29,6 +29,10 @@ export default {
     },
     options: {
       type: Array,
+      required: true,
+    },
+    nullValueName: {
+      type: String,
       required: true,
     },
     value: {
