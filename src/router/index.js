@@ -2,16 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import LoginPage from "@/views/LoginPage";
-// import TaskHomeRoute from "@/views/TaskHomeRoute";
-// import TaskPage from "@/views/TaskPage";
-// import TaskList from "@/views/TaskList";
-// import ReportPage from "@/views/ReportPage";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Register from "@/views/SignupPage";
-// import HomePage from "@/views/HomePage";
-// import TimerModal from "../components/TimerModal";
-
-// import TrainingRouterPage from "@/views/Training/TrainingRouterPage";
 import CreateTraining from "@/views/Training/CreateTraining";
 import TrainingDashboard from "@/views/Training/TrainingDashboard";
 import TrainingDetailPage from "@/views/Training/TrainingDetailPage";
@@ -25,6 +17,8 @@ import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 import Employee from "@/views/Admin/Employee";
 import EmployeeRouter from "@/views/Admin/EmployeeRouter";
 import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
+
+// import { getToken } from "@/utils/storage";
 
 Vue.use(Router);
 
@@ -43,37 +37,11 @@ const router = new Router({
       name: "LoginPage",
       component: LoginPage,
     },
-    // {
-    //   path: "/home",
-    //   name: "HomePage",
-    //   component: HomePage,
-    // },
-    // {
-    //   path: "/timer",
-    //   name: "TimerModal",
-    //   component: TimerModal,
-    // },
     {
       path: "/register",
       name: "Register",
       component: Register,
     },
-    // {
-    //   path: "/createtask",
-    //   component: TaskHomeRoute,
-    //   children: [
-    //     {
-    //       path: "",
-    //       name: "TaskPage",
-    //       component: TaskPage,
-    //     },
-    //     {
-    //       path: "tasks",
-    //       name: "TaskList",
-    //       component: TaskList,
-    //     },
-    //   ],
-    // },
 
     {
       path: "/admin",
@@ -133,6 +101,9 @@ const router = new Router({
           ],
         },
       ],
+      // beforeEnter: (to, from, next) => {
+      //   checkValidation("ADMIN", next);
+      // },
     },
     {
       path: "*",
@@ -141,5 +112,28 @@ const router = new Router({
     },
   ],
 });
+
+// const checkValidation = (role, next) => {
+//   const token = getToken();
+//   if (token) {
+//     const user = JSON.parse(btoa(token.split(".")[1]));
+//     if (user.role === role) {
+//       next();
+//     } else {
+//       next({ name: "ErrorPage" });
+//     }
+//   } else {
+//     next({ name: "LoginPage" });
+//   }
+// }
+
+// router.afterEach((to) => {
+//   const token = getToken();
+//   if (token) {
+//     if (to.name !== "LoginPage") {
+//       router.replace("/");
+//     }
+//   }
+// });
 
 export default router;

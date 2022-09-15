@@ -20,14 +20,14 @@
                 alt="checkbox"
                 width="25"
                 :class="
-                  (index + 1) % 2 == 0
+                  dayTask.status
                     ? 'check--logo--completed'
                     : 'check--logo--incompleted'
                 "
               />
             </div>
             <div class="col-auto">
-              <p class="day--title">Create Simple Portfolio</p>
+              <p class="day--title">{{ dayTask.name }}</p>
             </div>
           </div>
         </div>
@@ -47,17 +47,27 @@
         <div class="card card-body">
           <div class="row align-items-center my-1">
             <div class="col-12">
-              <p>Task Description:</p>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+              <p class="task--title">Task Description:</p>
+              <p class="task--description">
+                {{ dayTask.description }}
+              </p>
 
-              <div class="d-flex gap-2">
-                  <ButtonComponent 
+              <p class="task--title">Task Type:</p>
+              <BadgeComponent
+                :label="dayTask.type"
+                class="badge--basic--neon badge--neon--success--outline"
+              />
+
+              <div class="d-flex gap-2 mt-3">
+                <ButtonComponent
                   label="Edit"
                   class="btn--secondary--outline--sm"
-                  @onClick="show"/>
-                   <ButtonComponent 
+                  @onClick="show"
+                />
+                <ButtonComponent
                   label="Delete"
-                  class="btn--secondary--outline--sm"/>
+                  class="btn--secondary--outline--sm"
+                />
               </div>
             </div>
           </div>
@@ -68,12 +78,17 @@
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import BadgeComponent from "@/components/BadgeComponent.vue";
 // import {mapGetters} from "vuex"
 export default {
   name: "TrainingTaskList",
   props: {
     index: {
       type: Number,
+      required: true,
+    },
+    dayTask: {
+      type: Object,
       required: true,
     },
     lastIndex: {
@@ -83,6 +98,7 @@ export default {
   },
   components: {
     ButtonComponent,
+    BadgeComponent,
   },
   methods: {
     showTaskPage(id) {
@@ -91,11 +107,10 @@ export default {
         params: { dayId: id },
       });
     },
-    show(){
-      this.$emit("show",{id:2,name:"task1",description:"sdfghj"})
-    }
+    show() {
+      this.$emit("show", { id: 2, name: "task1", description: "sdfghj" });
+    },
   },
- 
 };
 </script>
 <style scoped>
@@ -125,14 +140,21 @@ export default {
   cursor: pointer;
 }
 
+.task--title {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0px;
+  margin-bottom: 5px;
+}
+
+.task--description {
+  font-size: 14px;
+}
+
 .card--list {
   /* background-color: #f1f1f1; */
   /* border: 1px solid rgb(229, 229, 229); */
   padding: 12px;
-}
-
-.task--title {
-  margin: 0px;
 }
 
 .day--title {

@@ -104,6 +104,7 @@ export default {
       trainingId: this.$route.params.trainingId,
       trainingName: "",
       trainingDescription: "",
+      trainingDayList: [],
     };
   },
   components: {
@@ -114,7 +115,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      trainingDayList: "getTrainingDayList",
+      // trainingDayList: "getTrainingDayList",
       employeeList: "getEmployeeList",
     }),
   },
@@ -129,7 +130,8 @@ export default {
       successCallback: (res) => {
         this.trainingName = res.data.name;
         this.trainingDescription = res.data.description;
-        this.$store.dispatch("SET_TRAINING_LIST", res.data.days);
+        this.trainingDayList = res.data.days;
+        // this.$store.dispatch("SET_TRAINING_LIST", res.data.days);
       },
       errorCallback: (err) => {
         console.log(err);

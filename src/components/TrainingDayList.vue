@@ -35,7 +35,7 @@
           <ButtonComponent
             label="View Task Details"
             class="btn--secondary--outline--sm"
-            @onClick="showTaskPage(2)"
+            @onClick="showTaskPage(trainingDay.name)"
           />
           <span class="mx-2 ms-3">
             <font-awesome-icon
