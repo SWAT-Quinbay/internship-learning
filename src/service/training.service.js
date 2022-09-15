@@ -55,3 +55,25 @@ export const getTrainingByDayId = ({ success, error, trainingId, dayId }) => {
       error && error(err);
     });
 };
+
+export const editTaskById = ({ success, error, payload }) => {
+  axios
+    .put(`${BASE_TRAINGING_URL}/update-task`, payload)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};
+
+export const deleteTaskById = ({ success, error, payload }) => {
+  axios
+    .put(`${BASE_TRAINGING_URL}/delete-task`, payload)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};
