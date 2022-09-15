@@ -25,48 +25,56 @@
       <div class="w-50">Email</div>
       <div class="w-50">Designation</div>
       <div class="w-50">Verified</div>
-      <div class="w-50">Task Status</div>
+      <div class="w-50">DOJ</div>
+      <div class="w-50">Profile</div>
     </div>
 
 
-       <div class="d-flex gap-2 card--content" @click="navigate">
-      <div class="w-50">Monisha</div>
-      <div class="w-50">monisha@gmail.com</div>
-      <div class="w-50">Developer</div>
-      <div class="w-50">Yes</div>
-      <div class="w-50">view</div>
+       <div class="d-flex gap-2 card--content" @click="navigate(employee.id)" v-for="(employee,index) in employeeList" :key="index">
+      <div class="w-50">{{employee.name}}</div>
+      <div class="w-50">{{employee.email}}</div>
+      <div class="w-50">{{employee.designation ? employee.designation : "-"}}</div>
+      <div class="w-50">{{employee.status ? "Yes" : "Pending"}}</div>
+       <div class="w-50">{{employee.dateOfJoining | Date}}</div>
+      <div class="w-50"><ButtonComponent 
+      label="view"
+      class="btn--secondary--outline--sm"/></div>
     </div>
 
- <div class="d-flex gap-2 card--content " @click="navigate">
-      <div class="w-50">Monisha</div>
-      <div class="w-50">monisha@gmail.com</div>
-      <div class="w-50">Developer</div>
-      <div class="w-50">Yes</div>
-      <div class="w-50">view</div>
-    </div>
+
     
     
   </div>
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue"
+import {mapGetters} from "vuex"
 export default {
   name: "TrainingRouterPage",
   data(){
     return{
-      id:2
+     
     }
   },
   components:{
     ButtonComponent
   },
   methods:{
-    navigate(){
+    navigate(id){
       this.$router.push({
         name:"EmployeeProfile",
-        params:{employeeId : this.id}})
+        params:{employeeId : id}})
     }
+  },
+  computed:{
+    ...mapGetters({
+      employeeList:'getEmployeeList'
+    })
+  },
+  mounted(){
+    this.$store.dispatch("GET_EMPLOYEE_LIST")
   }
+
 };
 </script>
 <style scoped>

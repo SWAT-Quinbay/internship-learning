@@ -6,6 +6,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import store from "@/store/index";
 
+
+Vue.filter('Date',function(value){
+  
+  return new Date(value).toDateString();
+})
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
