@@ -1,9 +1,12 @@
-import { getEmployeeList,getEmployeeDetails } from "@/service/employee.service";
+import {
+  getEmployeeList,
+  getEmployeeDetails,
+} from "@/service/employee.service";
 
 export default {
   state: {
     employeeList: [],
-    employeeDetails:[]
+    employeeDetails: {},
   },
   getters: {
     getEmployeeList: (state) => {
@@ -25,7 +28,7 @@ export default {
     GET_EMPLOYEE_LIST({ commit }) {
       getEmployeeList({
         success: (res) => {
-          // console.log(res);
+          console.log(res);
           commit("setEmployeeList", res.data);
         },
         error: (err) => {
@@ -34,17 +37,17 @@ export default {
       });
     },
 
-    GET_EMPLOYEE_DETAIL_BY_ID({commit},employeeId){
+    GET_EMPLOYEE_DETAIL_BY_ID({ commit }, employeeId) {
       getEmployeeDetails({
         employeeId,
-        success:(res)=>{
+        success: (res) => {
           console.log(res);
-          commit("setEmployeeDetails",res.data)
+          commit("setEmployeeDetails", res.data);
         },
-        error:(err)=>{
-          console.log(err)
-        }
-      })
-    }
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    },
   },
 };

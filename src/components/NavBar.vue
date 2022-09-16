@@ -1,26 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg" id="NavBar">
     <div class="container-fluid">
-      <!-- <a class="navbar-brand" href="#">
-        <img
-          src="@/assets/admin-logo.png"
-          alt=""
-          width="200"
-          v-if="NavBarData.role === 'ADMIN'"
-        />
-        <img
-          src="@/assets/dealer-logo.png"
-          alt=""
-          width="200"
-          v-else-if="NavBarData.role === 'DEALER'"
-        />
-        <img
-          src="@/assets/retailer-logo.png"
-          alt=""
-          width="200"
-          v-else-if="NavBarData.role === 'RETAILER'"
-        />
-      </a> -->
       <a class="navbar-brand" href="#"> Quinbay Training</a>
       <button
         class="navbar-toggler btn--toggle"

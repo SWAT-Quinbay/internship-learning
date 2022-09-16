@@ -15,7 +15,6 @@
         />
       </div>
     </div>
-
     <div class="row">
       <div
         class="col-md-3"
@@ -34,6 +33,7 @@ import TrainingCard from "@/components/TrainingCard.vue";
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import { mapGetters } from "vuex";
+import { getTokenRole } from "@/utils/storage.js";
 export default {
   name: "EmployeeDashboard",
   data() {
@@ -59,6 +59,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("GET_TRAINING_LIST");
+  },
+  created() {
+    console.log(getTokenRole());
   },
 };
 </script>

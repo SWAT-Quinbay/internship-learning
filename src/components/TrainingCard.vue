@@ -23,6 +23,7 @@
 </template>
 <script>
 import BadgeComponent from "@/components/BadgeComponent.vue";
+import { getTokenRole } from "@/utils/storage.js";
 import { mapGetters } from "vuex";
 export default {
   name: "TrainingCard",
@@ -42,16 +43,18 @@ export default {
   },
   methods: {
     showTrainingPage(id) {
-      if (this.user.role === "ADMIN") {
-        this.$router.push({
-          name: "TrainingDetailPage",
-          params: { trainingId: id },
-        });
-      } else {
-        this.$router.push({
-          name: "EmployeeTrainingDetailPage",
-          params: { trainingId: id },
-        });
+      if (getTokenRole()) {
+        if (getTokenRole() == "ADMIN") {
+          this.$router.push({
+            name: "TrainingDetailPage",
+            params: { trainingId: id },
+          });
+        } else {
+          this.$router.push({
+            name: "EmployeeTrainingDetailPage",
+            params: { trainingId: id },
+          });
+        }
       }
     },
   },

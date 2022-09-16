@@ -80,6 +80,7 @@
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import { getTokenRole } from "@/utils/storage.js";
 import { mapGetters } from "vuex";
 export default {
   name: "TrainingDaylist",
@@ -107,16 +108,18 @@ export default {
   },
   methods: {
     showTaskPage(id) {
-      if (this.user.role === "ADMIN") {
-        this.$router.push({
-          name: "TrainingDayDetailPage",
-          params: { dayId: id },
-        });
-      } else {
-        this.$router.push({
-          name: "EmployeeTrainingDayDetailPage",
-          params: { dayId: id },
-        });
+      if (getTokenRole()) {
+        if (getTokenRole() == "ADMIN") {
+          this.$router.push({
+            name: "TrainingDayDetailPage",
+            params: { dayId: id },
+          });
+        } else {
+          this.$router.push({
+            name: "EmployeeTrainingDayDetailPage",
+            params: { dayId: id },
+          });
+        }
       }
     },
   },
