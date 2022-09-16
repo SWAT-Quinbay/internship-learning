@@ -14,7 +14,23 @@
     <div class="container col-7">
         <div class="d-flex gap-4 p-3 pb-0 mb-0"><p class="heading--text">Trainings Assigned</p>
         </div>
-        <!-- <div class="card col-3 "></div> -->
+        <div class="row d-flex p-3 pt-0 align-items-center">
+        <div class="card col-3 m-2 ">
+          Training 1
+        </div>
+        <div class="card col-3 m-2 ">
+          Training 1
+        </div>
+        <div class="card col-3 m-2 ">
+          Training 1
+        </div>
+        <div class="card col-3 m-2 ">
+          Training 1
+        </div>
+         <!-- <div class="card col-3 m-2">
+          Training 1
+        </div> -->
+        </div>
     </div>
   </div>
 </template>

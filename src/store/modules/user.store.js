@@ -1,8 +1,10 @@
+import {getTokenRole} from "../../utils/storage"
+
 export default {
   state: {
     user: {
       id: "",
-      role: "",
+      role: getTokenRole(),
       verified: false,
     },
   },
