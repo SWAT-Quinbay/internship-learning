@@ -28,5 +28,6 @@ export const NavBarUserRoutes = {
       pushData: { path: `/profile/${getTokenUserId()}` },
       label: "Profile",
     },
+
   ],
 };

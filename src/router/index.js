@@ -66,6 +66,7 @@ const router = new Router({
       //     next();
       //   }
       // },
+
     },
     {
       path: "/mytrainings",
@@ -76,6 +77,7 @@ const router = new Router({
           name: "EmployeeDashboard",
           component: EmployeeDashboard,
         },
+
         {
           path: ":trainingId",
           component: EmployeeTrainingDetailRouter,

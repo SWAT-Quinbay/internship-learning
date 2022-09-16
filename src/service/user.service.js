@@ -22,3 +22,17 @@ export const loginUser = ({ success, error, user }) => {
       error && error(err);
     });
 };
+
+
+
+export const updatePassword = ({ success, error, payload }) => {
+  axios
+    .put(`${BASE_EMPLOYEE_URL}/user/change/password`, payload)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};
+
