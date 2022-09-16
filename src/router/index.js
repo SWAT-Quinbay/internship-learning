@@ -20,9 +20,7 @@ import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 import Employee from "@/views/Admin/Employee";
 import EmployeeRouter from "@/views/Admin/EmployeeRouter";
 import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
-import ProfileComponent from "@/views/Employee/ProfileComponent.vue"
-
-
+import ProfileComponent from "@/views/ProfileComponent.vue";
 
 import {
   getTokenRole,
@@ -55,6 +53,21 @@ const router = new Router({
       component: RegisterComponent,
     },
     {
+      path: "/profile/:id",
+      name: "ProfileComponent",
+      component: ProfileComponent,
+      // beforeEnter: (next) => {
+      //   if (
+      //     getTokenAuth() &&
+      //     getTokenAuth() == "true" &&
+      //     getTokenRole() &&
+      //     getTokenUserId()
+      //   ) {
+      //     next();
+      //   }
+      // },
+    },
+    {
       path: "/mytrainings",
       component: EmployeeDashboardRouter,
       children: [
@@ -62,11 +75,6 @@ const router = new Router({
           path: "",
           name: "EmployeeDashboard",
           component: EmployeeDashboard,
-        },
-        {
-          path: "/profile",
-          name: "ProfileComponent",
-          component: ProfileComponent,
         },
         {
           path: ":trainingId",
