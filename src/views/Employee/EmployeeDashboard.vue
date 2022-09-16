@@ -18,7 +18,7 @@
     <div class="row">
       <div
         class="col-md-3"
-        v-for="trainingdata in traininglist"
+        v-for="trainingdata in myTrainingList"
         :key="trainingdata.id"
       >
         <!-- {{ trainingdata}} -->
@@ -33,7 +33,7 @@ import TrainingCard from "@/components/TrainingCard.vue";
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import { mapGetters } from "vuex";
-import { getTokenRole } from "@/utils/storage.js";
+import { getTokenRole, getTokenUserId } from "@/utils/storage.js";
 export default {
   name: "EmployeeDashboard",
   data() {
@@ -54,11 +54,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      traininglist: "getTrainingList",
+      myTrainingList: "getMyTrainingList",
     }),
   },
   mounted() {
-    this.$store.dispatch("GET_TRAINING_LIST");
+    this.$store.dispatch("GET_TRAININGS_BY_EMPLOYEE_ID", getTokenUserId());
   },
   created() {
     console.log(getTokenRole());
