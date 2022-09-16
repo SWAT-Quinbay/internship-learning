@@ -7,13 +7,13 @@
       <div class="p-2 w-25">
         <ButtonComponent label="Search" class="btn--primary--sm--100" />
       </div>
-      <div class="p-2 w-25">
+      <!-- <div class="p-2 w-25">
         <ButtonComponent
           label="Add Training"
           class="btn--primary--sm--outline"
           @onClick="navigate"
         />
-      </div>
+      </div> -->
     </div>
 
     <div class="row">

@@ -1,18 +1,25 @@
-<template>
+<template >
+<div class="modal--bg">
 <div class="container1">
   <div class="cookiesContent" id="cookiesPopup">
-    <button class="close" @click="closemodal()">✖</button>
+    <button class="close mt-2" @click="closemodal()">✖</button>
     <!-- <img src="@/assets/wrong.jpeg" alt="cookies-img" /> -->
     <!-- {{taskdata}} -->
     <p>Are you sure?</p>
     <p>Do you really want to proceed further?</p>
-    <button class="accept" @click="deleteAccept">Yes</button>
+    <!-- <button class="accept" @click="deleteAccept">Yes</button> -->
+    <ButtonComponent 
+    label="Delete"
+    @onClick="deleteAccept"
+    class="btn--primary"/>
   </div>
+</div>
 </div>
 </template>
 
 <script>
 import {deleteTaskById} from "../service/training.service"
+import ButtonComponent from "../components/ButtonComponent.vue"
 export default{
 name:"DeleteModal",
 methods:{
@@ -33,6 +40,9 @@ methods:{
           })
   }
 },
+components:{
+  ButtonComponent
+},
 props:{
   taskdata:{
     type:Object
@@ -48,7 +58,16 @@ props:{
 </script>
 
 <style scoped>
-
+.modal--bg {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.481);
+}
 .container1{
     z-index: 100;
     top:40%;
@@ -60,6 +79,7 @@ props:{
    box-shadow: 0px 0px 20px 2px rgb(191, 191, 191);
 }
 .cookiesContent {
+  
   width: 370px;
   display: flex;
   flex-direction: column;

@@ -3,7 +3,7 @@ import { getEmployeeList,getEmployeeDetails } from "@/service/employee.service";
 export default {
   state: {
     employeeList: [],
-    employeeDetails:[]
+    employeeDetails:{}
   },
   getters: {
     getEmployeeList: (state) => {

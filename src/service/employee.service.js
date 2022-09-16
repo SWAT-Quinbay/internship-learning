@@ -16,7 +16,7 @@ export const getEmployeeList = ({ success, error }) => {
 export const getEmployeeDetails = ({ success, error ,employeeId}) => {
   console.log(employeeId)
   axios
-    .get(`${BASE_EMPLOYEE_URL}/user/get/details`,employeeId)
+    .get(`${BASE_EMPLOYEE_URL}/user/get/details/${employeeId}`)
     .then((res) => {
       success && success(res);
     })
