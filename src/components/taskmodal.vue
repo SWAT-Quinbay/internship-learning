@@ -20,8 +20,12 @@
         />
 
         <div class="card">
-          <input type="text" v-model="newtask.taskname" placeholder="Enter Task"/>
-          <select v-model="newtask.inputtype" >
+          <input
+            type="text"
+            v-model="newtask.taskname"
+            placeholder="Enter Task"
+          />
+          <select v-model="newtask.inputtype">
             <option value="yes or no">Yes or No</option>
             <option value="link">link</option>
           </select>
@@ -65,7 +69,7 @@ export default {
   data() {
     return {
       newtask: {
-       taskname: "",
+        taskname: "",
         inputtype: "",
       },
     };
@@ -80,7 +84,7 @@ export default {
       this.$emit("close");
     },
     addtask() {
-        let temp={... this.newtask};
+      let temp = { ...this.newtask };
       this.$store.dispatch("SET_TASK", temp);
     },
   },
@@ -96,24 +100,26 @@ export default {
 .card {
   margin: 1vh 1vh 1vh 1vh;
   padding: 1vh 2vh 2vh 2vh;
-  border:none;
-  box-shadow:rgba(0, 0, 0, 0.2) 0px 3px 5px;
+  border: none;
 }
-input[type=text], select, textarea {
+input[type="text"],
+select,
+textarea {
   width: 100%;
   padding: 6px;
-  border:none;
+  border: none;
   border-bottom: 1px solid #ccc;
   resize: vertical;
 }
-input:focus,:active{
-  border:none;
+input:focus,
+:active {
+  border: none;
 }
 
 .action--form--controller {
   margin-bottom: 20px;
-  border:1px solid rgb(175, 175, 175);
-  border-radius:17px;
+  border: 1px solid rgb(175, 175, 175);
+  border-radius: 17px;
 }
 .modal--bg {
   position: fixed;
@@ -128,7 +134,7 @@ input:focus,:active{
 .modal--body {
   width: 45%;
   margin: 5% auto;
-  background-color:white;
+  background-color: white;
   border-radius: 1vh;
 }
 .modal--content {
@@ -160,18 +166,18 @@ input:focus,:active{
 }
 #button {
   width: 80px;
-   margin-top:10px;
+  margin-top: 10px;
 
-  margin-left:5%;
+  margin-left: 5%;
 }
 .modal--footer {
   border-top: 1px solid rgb(202, 202, 202);
   padding: 10px 20px;
 }
-.card input,select {
-  margin-top:10px;
-  width:90%;
-  margin-left:5%;
-
+.card input,
+select {
+  margin-top: 10px;
+  width: 90%;
+  margin-left: 5%;
 }
 </style>

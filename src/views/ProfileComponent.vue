@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar :navBarData="user.role === 'ADMIN' ? adminRoute : userRoute" />
     <div class="container col-7">
       <div class="d-flex gap-3 profile--card">
         <div class="profile--img">
@@ -31,25 +30,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import NavBar from "@/components/NavBar.vue";
-import { NavBarAdminRoutes, NavBarUserRoutes } from "@/utils/NavBarRoutes";
 export default {
   name: "ProfileComponent",
   data() {
     return {
       employeeId: 2,
-      adminRoute: NavBarAdminRoutes,
-      userRoute: NavBarUserRoutes,
     };
-  },
-  components: {
-    NavBar,
-  },
-  computed: {
-    ...mapGetters({
-      user: "getUser",
-    }),
   },
   mounted() {
     // console.log(this.employeeId)

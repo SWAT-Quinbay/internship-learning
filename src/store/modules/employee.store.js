@@ -3,6 +3,8 @@ import {
   getEmployeeDetails,
   assignTrainingToEmployee,
   getTrainingByEmployeeId,
+  getUsersIdByTrainingId,
+  revokeTrainingFromEmployee,
 } from "@/service/employee.service";
 
 export default {
@@ -10,6 +12,7 @@ export default {
     employeeList: [],
     employeeDetails: {},
     myTrainingList: [],
+    usersIdByTrainingId: [],
   },
   getters: {
     getEmployeeList: (state) => {
@@ -21,6 +24,9 @@ export default {
     getMyTrainingList: (state) => {
       return state.myTrainingList;
     },
+    getUsersIdByTrainingId: (state) => {
+      return state.usersIdByTrainingId;
+    },
   },
   mutations: {
     setEmployeeList(state, value) {
@@ -31,6 +37,9 @@ export default {
     },
     setMyTrainingList(state, value) {
       return (state.myTrainingList = value);
+    },
+    setUsersIdByTrainingId(state, value) {
+      return (state.usersIdByTrainingId = value);
     },
   },
   actions: {
@@ -59,13 +68,41 @@ export default {
       });
     },
 
-    ASSIGN_TRAINING_TO_EMPLOYEE(context, { trainingId, employeeId }) {
+    ASSIGN_TRAINING_TO_EMPLOYEE({ dispatch }, { trainingId, employeeId }) {
       assignTrainingToEmployee({
         trainingId,
         employeeId,
         success: (res) => {
           console.log(res);
-          alert("Training Assigned Successfully");
+          dispatch("GET_USERS_ID_BY_TRAINING_ID", trainingId);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    },
+
+    REVOKE_TRAINING_FROM_EMPLOYEE({ dispatch }, { trainingId, employeeId }) {
+      revokeTrainingFromEmployee({
+        trainingId,
+        employeeId,
+        success: (res) => {
+          console.log(res);
+          dispatch("GET_USERS_ID_BY_TRAINING_ID", trainingId);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    },
+
+    GET_USERS_ID_BY_TRAINING_ID({ commit, dispatch }, trainingId) {
+      getUsersIdByTrainingId({
+        trainingId,
+        success: (res) => {
+          console.log(res);
+          commit("setUsersIdByTrainingId", res.data);
+          dispatch("GET_EMPLOYEE_LIST");
         },
         error: (err) => {
           console.log(err);

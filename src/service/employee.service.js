@@ -45,9 +45,36 @@ export const assignTrainingToEmployee = ({
     });
 };
 
+export const revokeTrainingFromEmployee = ({
+  success,
+  error,
+  employeeId,
+  trainingId,
+}) => {
+  axios
+    .put(`${BASE_TRAINGING_URL}/revoke/${employeeId}/${trainingId}`)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};
+
 export const getTrainingByEmployeeId = ({ success, error, employeeId }) => {
   axios
     .get(`${BASE_TRAINGING_URL}/user-training/${employeeId}`)
+    .then((res) => {
+      success && success(res);
+    })
+    .catch((err) => {
+      error && error(err);
+    });
+};
+
+export const getUsersIdByTrainingId = ({ success, error, trainingId }) => {
+  axios
+    .get(`${BASE_TRAINGING_URL}/getusers/${trainingId}`)
     .then((res) => {
       success && success(res);
     })

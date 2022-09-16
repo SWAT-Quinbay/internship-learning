@@ -21,6 +21,9 @@ import Employee from "@/views/Admin/Employee";
 import EmployeeRouter from "@/views/Admin/EmployeeRouter";
 import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
 import ProfileComponent from "@/views/ProfileComponent.vue";
+import ProfileRouter from "@/views/ProfileRouter";
+
+import store from "@/store";
 
 import {
   getTokenRole,
@@ -53,19 +56,27 @@ const router = new Router({
       component: RegisterComponent,
     },
     {
-      path: "/profile/:id",
-      name: "ProfileComponent",
-      component: ProfileComponent,
-      // beforeEnter: (next) => {
-      //   if (
-      //     getTokenAuth() &&
-      //     getTokenAuth() == "true" &&
-      //     getTokenRole() &&
-      //     getTokenUserId()
-      //   ) {
-      //     next();
-      //   }
-      // },
+      path: "/profile",
+      component: ProfileRouter,
+      children: [
+        {
+          path: "",
+          redirect: "/profile/" + getTokenUserId(),
+        },
+        {
+          path: ":id",
+          name: "ProfileComponent",
+          component: ProfileComponent,
+        },
+      ],
+      beforeEnter: (to, from, next) => {
+        if (getTokenAuth() && getTokenAuth() == "true") {
+          next();
+        } else {
+          console.log("sd");
+          next({ name: "LoginPage" });
+        }
+      },
     },
     {
       path: "/mytrainings",
@@ -171,8 +182,16 @@ const router = new Router({
 
 const checkValidation = (role, next) => {
   if (getTokenAuth() == "true" && getTokenRole() == role) {
+    store.dispatch("SET_USER", {
+      role: getTokenRole(),
+      id: getTokenUserId(),
+    });
     next();
   } else if (getTokenAuth() == "true" && getTokenRole() != role) {
+    store.dispatch("SET_USER", {
+      role: getTokenRole(),
+      id: getTokenUserId(),
+    });
     redirectWithRole(getTokenRole());
   } else {
     next({ name: "LoginPage" });
