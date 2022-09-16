@@ -7,8 +7,8 @@
         </div>
 
         <div class="flex-fill py-5 px-3">
-          <p class="username--text mb-0">{{employeeDetail.name}}</p>
-          <p class="text-muted">{{employeeDetail.designation}}</p>
+          <p class="username--text mb-0">{{employeeDetail[0].name}}</p>
+          <p class="text-muted">{{employeeDetail[0].designation}}</p>
         </div>
       </div>
     </div>
@@ -38,11 +38,12 @@
 
 <script>
 import {mapGetters} from "vuex"
+
 export default {
   name: "EmployeeProfile",
   data(){
     return{
-      employeeId:this.$route.params.employeeId
+      employeeId:2
     }
   },
   computed:{
