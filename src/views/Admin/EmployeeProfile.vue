@@ -12,32 +12,28 @@
         </div>
       </div>
     </div>
+    
     <div class="container col-7">
         <div class="d-flex gap-4 p-3 pb-0 mb-0"><p class="heading--text">Trainings Assigned</p>
         </div>
-        <div class="row d-flex p-3 pt-0 align-items-center">
-        <div class="card col-3 m-2 ">
-          Training 1
-        </div>
-        <div class="card col-3 m-2 ">
-          Training 1
-        </div>
-        <div class="card col-3 m-2 ">
-          Training 1
-        </div>
-        <div class="card col-3 m-2 ">
-          Training 1
-        </div>
-         <!-- <div class="card col-3 m-2">
+         <div class="row d-flex p-3 pt-0 " v-for="(training,index) in myTrainingList" :key="index">
+        <!-- <div class="card col-3 m-2" >Training 1</div>
+        <div class="card col-3 m-2">Training 1</div>
+        <div class="card col-3 m-2">Training 1</div> -->
+        <div class="card col-5 m-2">{{training.name}}</div>
+         <!-- <div class="card col-5 m-2">{{training.name}}</div>
+          <div class="card col-5 m-2">{{training.name}}</div> -->
+        <!-- <div class="card col-3 m-2">
           Training 1
         </div> -->
-        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex"
+// import {  getTokenUserId } from "@/utils/storage.js";
 export default {
   name: "EmployeeProfile",
   data(){
@@ -47,12 +43,15 @@ export default {
   },
   computed:{
     ...mapGetters({
-      employeeDetail:"getEmployeeDetails"
+      employeeDetail:"getEmployeeDetails",
+       myTrainingList: "getMyTrainingList",
     })
   },
   mounted(){
     // console.log(this.employeeId)
+    // console.log(this.employeeId)
     this.$store.dispatch("GET_EMPLOYEE_DETAIL_BY_ID",this.employeeId)
+     this.$store.dispatch("GET_TRAININGS_BY_EMPLOYEE_ID", this.employeeId);
   }
 };
 </script>

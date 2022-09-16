@@ -77,6 +77,7 @@ const router = new Router({
           next({ name: "LoginPage" });
         }
       },
+
     },
     {
       path: "/mytrainings",
@@ -87,6 +88,7 @@ const router = new Router({
           name: "EmployeeDashboard",
           component: EmployeeDashboard,
         },
+
         {
           path: ":trainingId",
           component: EmployeeTrainingDetailRouter,
