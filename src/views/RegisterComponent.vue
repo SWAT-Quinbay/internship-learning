@@ -119,8 +119,6 @@ export default {
           console.log(err);
         },
       });
-
-      // this.$router.push({name:"OtpPage"})
     },
   },
 };
