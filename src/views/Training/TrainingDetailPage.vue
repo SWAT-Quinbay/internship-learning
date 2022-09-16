@@ -78,8 +78,9 @@
                   </div>
                   <div class="col-3">
                     <ButtonComponent
-                      label="Remove"
-                      class="btn--danger--sm--fx"
+                      label="Add"
+                      class="btn--black--outline"
+                      @onClick="assignTraining(data.id)"
                     />
                   </div>
                 </div>
@@ -122,6 +123,12 @@ export default {
   methods: {
     navigate() {
       this.$router.push({ name: "CreateDay" });
+    },
+    assignTraining(id) {
+      this.$store.dispatch("ASSIGN_TRAINING_TO_EMPLOYEE", {
+        trainingId: this.trainingId,
+        employeeId: id,
+      });
     },
   },
   created() {

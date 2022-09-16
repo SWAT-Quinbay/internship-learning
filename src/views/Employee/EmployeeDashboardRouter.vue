@@ -8,7 +8,6 @@
 import NavBar from "@/components/NavBar.vue";
 import { NavBarAdminRoutes, NavBarUserRoutes } from "@/utils/NavBarRoutes";
 import { mapGetters } from "vuex";
-
 export default {
   name: "EmployeeDashboardRouter",
   data() {
