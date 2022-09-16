@@ -55,6 +55,11 @@ const router = new Router({
       component: RegisterComponent,
     },
     {
+      path: "/profile",
+      name: "ProfileComponent",
+      component: ProfileComponent,
+    },
+    {
       path: "/mytrainings",
       component: EmployeeDashboardRouter,
       children: [
@@ -63,11 +68,7 @@ const router = new Router({
           name: "EmployeeDashboard",
           component: EmployeeDashboard,
         },
-        {
-          path: "/profile",
-          name: "ProfileComponent",
-          component: ProfileComponent,
-        },
+       
         {
           path: ":trainingId",
           component: EmployeeTrainingDetailRouter,

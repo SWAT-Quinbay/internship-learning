@@ -19,6 +19,10 @@ export const NavBarUserRoutes = {
       label: "Training",
     },
     // {
+    //   name: "ProfileComponent",
+    //   label: "Profile",
+    // },
+    // {
     //   name: "Profile",
     //   label: "Profile",
     // },
