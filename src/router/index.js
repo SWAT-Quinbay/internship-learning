@@ -20,18 +20,17 @@ import AdminRouterPage from "@/views/Admin/AdminRouterPage";
 import Employee from "@/views/Admin/Employee";
 import EmployeeRouter from "@/views/Admin/EmployeeRouter";
 import EmployeeProfile from "@/views/Admin/EmployeeProfile.vue";
+import ProfileComponent from "@/views/ProfileComponent.vue";
 
-
-
-// import {
-//   getTokenRole,
-//   getTokenAuth,
-//   getTokenUserId,
-//   // deleteTokenAuth,
-//   // deleteTokenRole,
-//   // deleteTokenUserId,
-// } from "@/utils/storage";
-// import redirectWithRole from "@/utils/redirectWithRole";
+import {
+  getTokenRole,
+  getTokenAuth,
+  getTokenUserId,
+  // deleteTokenAuth,
+  // deleteTokenRole,
+  // deleteTokenUserId,
+} from "@/utils/storage";
+import redirectWithRole from "@/utils/redirectWithRole";
 
 Vue.use(Router);
 
@@ -52,6 +51,21 @@ const router = new Router({
       path: "/register",
       name: "RegisterComponent",
       component: RegisterComponent,
+    },
+    {
+      path: "/profile/:id",
+      name: "ProfileComponent",
+      component: ProfileComponent,
+      // beforeEnter: (next) => {
+      //   if (
+      //     getTokenAuth() &&
+      //     getTokenAuth() == "true" &&
+      //     getTokenRole() &&
+      //     getTokenUserId()
+      //   ) {
+      //     next();
+      //   }
+      // },
     },
     {
       path: "/mytrainings",
@@ -79,9 +93,9 @@ const router = new Router({
           ],
         },
       ],
-      // beforeEnter: (to, from, next) => {
-      //   checkValidation("USER", next);
-      // },
+      beforeEnter: (to, from, next) => {
+        checkValidation("USER", next);
+      },
     },
 
     {
@@ -143,9 +157,9 @@ const router = new Router({
           ],
         },
       ],
-      // beforeEnter: (to, from, next) => {
-      //   checkValidation("ADMIN", next);
-      // },
+      beforeEnter: (to, from, next) => {
+        checkValidation("ADMIN", next);
+      },
     },
     {
       path: "*",
@@ -155,24 +169,24 @@ const router = new Router({
   ],
 });
 
-// const checkValidation = (role, next) => {
-//   if (getTokenAuth() == "true" && getTokenRole() == role) {
-//     next();
-//   } else if (getTokenAuth() == "true" && getTokenRole() != role) {
-//     redirectWithRole(getTokenRole());
-//   } else {
-//     next({ name: "LoginPage" });
-//   }
-// };
+const checkValidation = (role, next) => {
+  if (getTokenAuth() == "true" && getTokenRole() == role) {
+    next();
+  } else if (getTokenAuth() == "true" && getTokenRole() != role) {
+    redirectWithRole(getTokenRole());
+  } else {
+    next({ name: "LoginPage" });
+  }
+};
 
-// router.afterEach((to, next) => {
-//   if (getTokenUserId() && getTokenAuth() == "true") {
-//     if (to.name === "LoginPage") {
-//       redirectWithRole(getTokenRole());
-//     }
-//   } else {
-//     next({ name: "LoginPage" });
-//   }
-// });
+router.afterEach((to, next) => {
+  if (getTokenUserId() && getTokenAuth() == "true") {
+    if (to.name === "LoginPage") {
+      redirectWithRole(getTokenRole());
+    }
+  } else {
+    next({ name: "LoginPage" });
+  }
+});
 
 export default router;

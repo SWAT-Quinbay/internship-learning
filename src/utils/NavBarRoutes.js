@@ -1,13 +1,19 @@
+import { getTokenUserId } from "@/utils/storage";
+
 export const NavBarAdminRoutes = {
   role: "ADMIN",
   routes: [
     {
-      name: "TrainingDashboard",
+      pushData: { name: "TrainingDashboard" },
       label: "Training",
     },
     {
-      name: "Employee",
+      pushData: { name: "Employee" },
       label: "Employee",
+    },
+    {
+      pushData: { path: `/profile/${getTokenUserId()}` },
+      label: "Profile",
     },
   ],
 };
@@ -15,12 +21,12 @@ export const NavBarUserRoutes = {
   role: "USER",
   routes: [
     {
-      name: "EmployeeDashboard",
+      pushData: { name: "EmployeeDashboard" },
       label: "Training",
     },
-    // {
-    //   name: "Profile",
-    //   label: "Profile",
-    // },
+    {
+      pushData: { path: `/profile/${getTokenUserId()}` },
+      label: "Profile",
+    },
   ],
 };

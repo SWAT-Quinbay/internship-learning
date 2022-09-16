@@ -7,13 +7,6 @@
       <div class="p-2 w-25">
         <ButtonComponent label="Search" class="btn--primary--sm--100" />
       </div>
-      <!-- <div class="p-2 w-25">
-        <ButtonComponent
-          label="Add Training"
-          class="btn--primary--sm--outline"
-          @onClick="navigate"
-        />
-      </div> -->
     </div>
     <div class="row">
       <div
@@ -21,7 +14,6 @@
         v-for="trainingdata in myTrainingList"
         :key="trainingdata.id"
       >
-        <!-- {{ trainingdata}} -->
         <TrainingCard :training="trainingdata" />
       </div>
     </div>

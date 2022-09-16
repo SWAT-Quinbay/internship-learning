@@ -1,11 +1,10 @@
-import {getTokenRole} from "../../utils/storage"
+import { getTokenRole, getTokenUserId } from "../../utils/storage";
 
 export default {
   state: {
     user: {
-      id: "",
+      id: getTokenUserId(),
       role: getTokenRole(),
-      verified: false,
     },
   },
   getters: {

@@ -5,9 +5,10 @@
         <div class="profile--img">
           <img src="../../assets/user.png" />
         </div>
+
         <div class="flex-fill py-5 px-3">
-          <p class="username--text mb-0">John Dasyfagh</p>
-          <p class="text-muted">Developer</p>
+          <p class="username--text mb-0">{{employeeDetail.name}}</p>
+          <p class="text-muted">{{employeeDetail.designation}}</p>
         </div>
       </div>
     </div>

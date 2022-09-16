@@ -27,7 +27,7 @@
             :key="index"
           >
             <router-link
-              :to="{ name: data.name }"
+              :to="data.pushData"
               class="nav--link"
               active-class="active"
               >{{ data.label }}</router-link
