@@ -14,7 +14,7 @@
       <div class="row align-items-center justify-content-between">
         <div class="col-8">
           <div class="row">
-            <div class="col-auto">
+            <div class="col-auto" v-if="user.role === 'USER'">
               <img
                 src="@/assets/check.png"
                 alt="checkbox"
@@ -26,7 +26,7 @@
                 "
               />
             </div>
-            <div class="col-auto">
+            <div class="col-10">
               <p class="day--title">Day {{ trainingDay.name }}</p>
             </div>
           </div>
@@ -57,7 +57,7 @@
             v-for="(data, index) in trainingDay.tasks"
             :key="index"
           >
-            <div class="col-auto">
+            <div class="col-auto" v-if="user.role === 'USER'">
               <img
                 src="@/assets/check.png"
                 alt="checkbox"
@@ -69,7 +69,7 @@
                 "
               />
             </div>
-            <div class="col-10 px-0">
+            <div class="col-10">
               <p class="task--title">{{ data.name }}</p>
             </div>
           </div>

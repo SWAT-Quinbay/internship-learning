@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar :navBarData="user.role === 'ADMIN' ? adminRoute : userRoute" />
     <div class="container col-7">
       <div class="d-flex gap-3 profile--card">
         <div class="profile--img">
@@ -43,6 +42,7 @@
 </template>
 
 <script>
+
 import { mapGetters } from "vuex";
 import {updatePassword} from "../service/user.service"
 import ButtonComponent from "../components/ButtonComponent.vue"
@@ -51,10 +51,12 @@ import TextInputComponent from "../components/TextInputComponent.vue"
 import {  getTokenRole} from "@/utils/storage.js";
 import NavBar from "@/components/NavBar.vue";
 import { NavBarAdminRoutes, NavBarUserRoutes } from "@/utils/NavBarRoutes";
+
 export default {
   name: "ProfileComponent",
   data() {
     return {
+
       employeeId: this.$route.params.id,
       adminRoute: NavBarAdminRoutes,
       userRoute: NavBarUserRoutes,

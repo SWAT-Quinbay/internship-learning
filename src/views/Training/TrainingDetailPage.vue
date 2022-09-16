@@ -2,7 +2,7 @@
   <div class="container py-5">
     <div class="row">
       <div class="col-8">
-        <img src="@/assets/flag.svg" alt="" srcset="" width="40" class="mb-3" />
+        <!-- <img src="@/assets/flag.svg" alt="" srcset="" width="40" class="mb-3" /> -->
         <h4 class="training--title">{{ trainingName }}</h4>
         <h6 class="training--subtitle">{{ trainingDescription }}</h6>
         <hr class="hr--training--page my-4" />
@@ -78,9 +78,16 @@
                   </div>
                   <div class="col-3">
                     <ButtonComponent
+                      v-if="!checkTrainingEnrolled(data.id)"
                       label="Add"
-                      class="btn--black--outline"
+                      class="btn--black--sm--fx"
                       @onClick="assignTraining(data.id)"
+                    />
+                    <ButtonComponent
+                      v-else
+                      label="Remove"
+                      class="btn--danger--sm--fx"
+                      @onClick="revokeTraining(data.id)"
                     />
                   </div>
                 </div>
@@ -118,14 +125,25 @@ export default {
     ...mapGetters({
       // trainingDayList: "getTrainingDayList",
       employeeList: "getEmployeeList",
+      usersEnrolled: "getUsersIdByTrainingId",
     }),
   },
   methods: {
+    checkTrainingEnrolled(id) {
+      // console.log(this.usersEnrolled, id);
+      return this.usersEnrolled.includes(id);
+    },
     navigate() {
       this.$router.push({ name: "CreateDay" });
     },
     assignTraining(id) {
       this.$store.dispatch("ASSIGN_TRAINING_TO_EMPLOYEE", {
+        trainingId: this.trainingId,
+        employeeId: id,
+      });
+    },
+    revokeTraining(id) {
+      this.$store.dispatch("REVOKE_TRAINING_FROM_EMPLOYEE", {
         trainingId: this.trainingId,
         employeeId: id,
       });
@@ -144,7 +162,8 @@ export default {
         console.log(err);
       },
     });
-    this.$store.dispatch("GET_EMPLOYEE_LIST");
+    this.$store.dispatch("GET_USERS_ID_BY_TRAINING_ID", this.trainingId);
+    // this.$store.dispatch("GET_EMPLOYEE_LIST");
   },
 };
 </script>

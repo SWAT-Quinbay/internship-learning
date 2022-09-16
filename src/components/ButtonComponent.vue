@@ -272,6 +272,20 @@ export default {
   background-color: #ffffff;
 }
 
+.btn--black--sm--fx {
+  color: #000000;
+  border: 1px solid #000000;
+  /* border: none; */
+  outline: none;
+  width: 100%;
+  /* height: 30px; */
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 5px 0px;
+  background-color: #ffffff;
+}
+
 .btn--danger--sm--outline {
   color: #dc3545;
   border: 1px solid #dc3545;

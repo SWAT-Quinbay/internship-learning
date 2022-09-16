@@ -14,7 +14,7 @@
       <div class="row align-items-center justify-content-between">
         <div class="col-8">
           <div class="row">
-            <div class="col-auto">
+            <div class="col-auto" v-if="user.role === 'USER'">
               <img
                 src="@/assets/check.png"
                 alt="checkbox"
@@ -80,6 +80,7 @@
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import BadgeComponent from "@/components/BadgeComponent.vue";
+import { mapGetters } from "vuex";
 // import {mapGetters} from "vuex"
 export default {
   name: "TrainingTaskList",
@@ -97,6 +98,11 @@ export default {
   components: {
     ButtonComponent,
     BadgeComponent,
+  },
+  computed: {
+    ...mapGetters({
+      user: "getUser",
+    }),
   },
   methods: {
     showTaskPage(id) {
