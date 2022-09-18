@@ -44,7 +44,7 @@
               <h6 class="card--title">
                 Training assigned for
                 <BadgeComponent
-                  :label="25 + ' People'"
+                  :label="usersEnrolled.length"
                   class="badge--basic--neon badge--neon--success--outline"
                 />
               </h6>
