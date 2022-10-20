@@ -1,6 +1,6 @@
 <template>
   <div class="container pt-5">
-    <div class="d-flex gap-3 align-items-center">
+    <div class="d-flex gap-3 align-items-center" v-if="null">
       <div class="p-2 w-100">
         <TextInputComponent class="my-3" placeholder="Search for training" />
       </div>
@@ -9,11 +9,7 @@
       </div>
     </div>
     <div class="row">
-      <div
-        class="col-md-3"
-        v-for="trainingdata in myTrainingList"
-        :key="trainingdata.id"
-      >
+      <div class="col-md-3" v-for="trainingdata in myTrainingList" :key="trainingdata.id">
         <TrainingCard :training="trainingdata" />
       </div>
     </div>

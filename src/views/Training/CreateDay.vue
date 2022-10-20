@@ -4,33 +4,22 @@
       <div class="col-4">
         <div class="row task--timeline">
           <div class="col-12">
-            <img
-              src="@/assets/flag.svg"
-              alt=""
-              srcset=""
-              width="40"
-              class="mb-3"
-            />
+            <img src="@/assets/flag.svg" alt="" srcset="" width="40" class="mb-3" />
             <h4 class="training--title">Create Task for a day</h4>
           </div>
           <div class="col-12">
-            <h6 class="training--subtitle">
-              Assign tasks for a day by creating Day.
-            </h6>
+            <h6 class="training--subtitle">Assign tasks for a day by creating Day.</h6>
           </div>
           <div class="col-12">
             <SelectInputComponent
               label="Training Day"
               class="my-3"
               placeholder="Enter the training name"
+              nullValueName="Select Day"
               :options="NoOfDays"
               v-model="trainingdata.name"
             />
-            <ButtonComponent
-              label="Add New Task +"
-              class="btn--secondary--outline--sm"
-              @onClick="addTask()"
-            />
+            <ButtonComponent label="Add New Task +" class="btn--secondary--outline--sm" @onClick="addTask()" />
           </div>
           <div class="col-12 my-4 small">
             <ol>
@@ -40,8 +29,9 @@
             </ol>
             <ButtonComponent
               label="Create Training"
-              class="btn--primary--sm--outline p-2"
+              :class="[isVaildTask ? 'btn--primary--sm--outline' : 'btn--disabled--sm', 'p-2']"
               @onClick="createDayWithTasks()"
+              :disabled="!isVaildTask"
             />
           </div>
         </div>
@@ -55,37 +45,23 @@
               placeholder="Enter the training name"
               v-model="tasks[index].name"
             />
-            <TextInputComponent
+            <TextAreaComponent
               label="Task Description"
+              min="20"
+              rows="7"
               class="my-3"
               placeholder="Enter the training description"
               v-model="tasks[index].description"
             />
             <div>
-              <label for="link" class="action--input--label"
-                >Choose Submission type:</label
-              ><br />
+              <label for="link" class="action--input--label">Choose Submission type:</label><br />
 
               <div class="d-flex gap-2 ml-4 action--input--label mt-2">
-                <input
-                  type="radio"
-                  :name="'taskType' + index"
-                  value="Link"
-                  v-model="tasks[index].type"
-                />Link
-                <input
-                  type="radio"
-                  :name="'taskType' + index"
-                  value="Submit"
-                  v-model="tasks[index].type"
-                />Submit
+                <input type="radio" :name="'taskType' + index" value="Link" v-model="tasks[index].type" />Link
+                <input type="radio" :name="'taskType' + index" value="Submit" v-model="tasks[index].type" />Submit
               </div>
             </div>
-            <ButtonComponent
-              label="Remove Task"
-              class="btn--danger--sm--outline my-3"
-              @onClick="removeTask(index)"
-            />
+            <ButtonComponent label="Remove Task" class="btn--danger--sm--outline my-3" @onClick="removeTask(index)" />
           </div>
         </div>
       </div>
@@ -94,9 +70,11 @@
 </template>
 <script>
 import TextInputComponent from "@/components/TextInputComponent.vue";
+import TextAreaComponent from "@/components/TextAreaComponent.vue";
 import SelectInputComponent from "@/components/SelectInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
-import {NoOfDays} from "@/utils/NoOfDays";
+import { NoOfDays } from "@/utils/NoOfDays";
+import Vue from "vue";
 export default {
   name: "CreateDay",
   data() {
@@ -104,15 +82,24 @@ export default {
       NoOfDays: NoOfDays,
       trainingdata: {
         trainingId: this.$route.params.trainingId,
-        name: "",
+        name: null,
       },
       tasks: [],
     };
   },
   components: {
     TextInputComponent,
+    TextAreaComponent,
     ButtonComponent,
     SelectInputComponent,
+  },
+  computed: {
+    isVaildTask() {
+      const isValidEntry = this.tasks.length > 0 && this.trainingdata.name;
+      const isValidTask =
+        this.tasks.length > 0 && this.tasks.every((task) => task.name && task.description && task.type);
+      return isValidEntry && isValidTask;
+    },
   },
   methods: {
     createDayWithTasks() {
@@ -126,6 +113,9 @@ export default {
         payload,
         successCallBack: (res) => {
           console.log(res);
+          this.trainingdata.name = null;
+          this.tasks = [];
+          Vue.$toast.success("Training Added");
         },
         errorCallback: (err) => {
           console.log(err);

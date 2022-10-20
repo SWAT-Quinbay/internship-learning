@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  BASE_EMPLOYEE_URL,
-  BASE_TRAINGING_URL,
-} from "@/constants/url.constant.js";
+import { BASE_EMPLOYEE_URL, BASE_TRAINGING_URL } from "@/constants/url.constant.js";
 
 export const getEmployeeList = ({ success, error }) => {
   axios
@@ -27,12 +24,7 @@ export const getEmployeeDetails = ({ success, error, employeeId }) => {
     });
 };
 
-export const assignTrainingToEmployee = ({
-  success,
-  error,
-  employeeId,
-  trainingId,
-}) => {
+export const assignTrainingToEmployee = ({ success, error, employeeId, trainingId }) => {
   console.log("trainingId", trainingId);
   console.log("employeeId", employeeId);
   axios
@@ -45,12 +37,7 @@ export const assignTrainingToEmployee = ({
     });
 };
 
-export const revokeTrainingFromEmployee = ({
-  success,
-  error,
-  employeeId,
-  trainingId,
-}) => {
+export const revokeTrainingFromEmployee = ({ success, error, employeeId, trainingId }) => {
   axios
     .put(`${BASE_TRAINGING_URL}/revoke/${employeeId}/${trainingId}`)
     .then((res) => {

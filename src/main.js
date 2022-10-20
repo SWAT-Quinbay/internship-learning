@@ -4,13 +4,18 @@ import router from "@/router/index";
 import { BootstrapVue } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import "vue-toast-notification/dist/theme-sugar.css";
 import store from "@/store/index";
+import VueToast from "vue-toast-notification";
 
+Vue.use(VueToast, {
+  position: "bottom-right",
+  duration: 4000,
+});
 
-Vue.filter('Date',function(value){
-  
+Vue.filter("Date", function (value) {
   return new Date(value).toDateString();
-})
+});
 /* import the fontawesome core */
 import { library } from "@fortawesome/fontawesome-svg-core";
 
@@ -26,14 +31,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(
-  faUserSecret,
-  faCirclePlus,
-  faPen,
-  faTrash,
-  faMagnifyingGlass,
-  faChevronDown
-);
+library.add(faUserSecret, faCirclePlus, faPen, faTrash, faMagnifyingGlass, faChevronDown);
 
 /* add font awesome icon component */
 Vue.component("font-awesome-icon", FontAwesomeIcon);

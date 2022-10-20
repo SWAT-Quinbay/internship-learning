@@ -7,20 +7,13 @@
         <h6 class="training--subtitle">{{ trainingDescription }}</h6>
         <hr class="hr--training--page my-4" />
         <div class="mb-2">
-          <ButtonComponent
-            label="Add Day & Task"
-            class="btn--secondary--outline--sm"
-            @onClick="navigate"
-          />
+          <ButtonComponent label="Add Day & Task" class="btn--secondary--outline--sm" @onClick="navigate" />
         </div>
         <div class="row">
           <div class="col-12">
             <div class="row">
               <div class="col-12">
-                <p
-                  class="text-center mt-5 text-muted small"
-                  v-if="trainingDayList.length === 0"
-                >
+                <p class="text-center mt-5 text-muted small" v-if="trainingDayList.length === 0">
                   No Trainging Day found!
                 </p>
                 <div v-else>
@@ -42,32 +35,22 @@
           <div class="people--card--body">
             <div class="card--header">
               <h6 class="card--title">
-                Training assigned for
-                <BadgeComponent
-                  :label="25 + ' People'"
-                  class="badge--basic--neon badge--neon--success--outline"
-                />
+                <BadgeComponent label="Training assigned" class="badge--basic--neon badge--neon--success--outline" />
               </h6>
             </div>
-            <div class="search--bar mb-2">
+            <div class="search--bar mb-2" v-if="null">
               <div class="row align-items-center">
                 <div class="col-8 pe-0">
-                  <TextInputComponent
-                    class="my-3"
-                    placeholder="Enter the user name"
-                  />
+                  <TextInputComponent class="my-3" placeholder="Enter the user name" />
                 </div>
                 <div class="col-4">
-                  <ButtonComponent
-                    label="Search"
-                    class="btn--primary--sm--100"
-                  />
+                  <ButtonComponent label="Search" class="btn--primary--sm--100" />
                 </div>
               </div>
             </div>
-            <div class="people--list">
+            <div class="people--list mt-4">
               <div
-                class="people--card"
+                :class="[!isLastValue(index, employeeList.length) && 'people--hr', 'people--card']"
                 v-for="(data, index) in employeeList"
                 :key="index"
               >
@@ -129,10 +112,18 @@ export default {
     }),
   },
   methods: {
+    isLastValue(index, length) {
+      return index === length - 1;
+    },
     checkTrainingEnrolled(id) {
       // console.log(this.usersEnrolled, id);
-      return this.usersEnrolled.includes(id);
+      const isUserEnrolled = this.usersEnrolled.find((item) => item === id);
+      if (isUserEnrolled) {
+        return true;
+      }
+      return false;
     },
+
     navigate() {
       this.$router.push({ name: "CreateDay" });
     },
@@ -201,7 +192,10 @@ export default {
 }
 
 .people--card {
-  border-bottom: 0.5px solid #c4c4c4;
   padding: 10px 15px;
+}
+
+.people--hr {
+  border-bottom: 0.5px solid #c4c4c4;
 }
 </style>

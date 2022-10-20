@@ -45,14 +45,14 @@ export default {
         },
       });
     },
-    ADD_TASK_TO_DAY(context, { successCallback, errorCallback, payload }) {
+    ADD_TASK_TO_DAY(context, { successCallBack, errorCallBack, payload }) {
       createDayAndTasks({
         payload,
         success: (res) => {
-          successCallback && successCallback(res);
+          successCallBack && successCallBack(res);
         },
         error: (err) => {
-          errorCallback && errorCallback(err);
+          errorCallBack && errorCallBack(err);
         },
       });
     },
@@ -72,10 +72,7 @@ export default {
         },
       });
     },
-    GET_TRAINING_BY_ID(
-      context,
-      { successCallback, errorCallback, trainingId }
-    ) {
+    GET_TRAINING_BY_ID(context, { successCallback, errorCallback, trainingId }) {
       getTrainingById({
         trainingId,
         success: (res) => {
@@ -86,10 +83,7 @@ export default {
         },
       });
     },
-    GET_TASK_BY_DAY_AND_TRAINING_ID(
-      context,
-      { successCallback, errorCallback, trainingId, dayId }
-    ) {
+    GET_TASK_BY_DAY_AND_TRAINING_ID(context, { successCallback, errorCallback, trainingId, dayId }) {
       getTrainingByDayId({
         trainingId,
         dayId,

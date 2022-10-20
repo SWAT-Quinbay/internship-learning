@@ -6,9 +6,7 @@
         <h4 class="training--title">Create Training</h4>
       </div>
       <div class="col-12">
-        <h6 class="training--subtitle">
-          Assign tasks for a day by creating Training.
-        </h6>
+        <h6 class="training--subtitle">Assign tasks for a day by creating Training.</h6>
       </div>
       <div class="col-12">
         <div class="row">
@@ -32,7 +30,8 @@
       <div style="max-width: 20%; margin-top: 10px">
         <ButtonComponent
           label="Create Training"
-          class="btn--primary--outline p-2"
+          :class="[isValidTraining ? 'btn--primary--outline' : 'btn--disabled', 'p-2']"
+          :disabled="!isValidTraining"
           @onClick="addTraining()"
         />
       </div>
@@ -42,6 +41,7 @@
 <script>
 import TextInputComponent from "@/components/TextInputComponent.vue";
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import Vue from "vue";
 export default {
   name: "CreateTraining",
   data() {
@@ -56,6 +56,11 @@ export default {
   components: {
     TextInputComponent,
     ButtonComponent,
+  },
+  computed: {
+    isValidTraining() {
+      return this.trainingdata.name && this.trainingdata.description;
+    },
   },
   methods: {
     addTraining() {
@@ -74,6 +79,7 @@ export default {
       });
       this.trainingdata.name = "";
       this.trainingdata.description = "";
+      Vue.$toast.success("Training Created");
     },
   },
 };

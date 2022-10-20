@@ -77,7 +77,6 @@ const router = new Router({
           next({ name: "LoginPage" });
         }
       },
-
     },
     {
       path: "/mytrainings",

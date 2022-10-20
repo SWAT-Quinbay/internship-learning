@@ -3,14 +3,11 @@ const TOKEN_AUTH = "iam-at";
 const TOKEN_USERID = "iam-uid";
 
 export const getTokenUserId = () => {
-  return (
-    localStorage.getItem(TOKEN_USERID) &&
-    atob(localStorage.getItem(TOKEN_USERID))
-  );
+  return localStorage.getItem(TOKEN_USERID);
 };
 
 export const setTokenUserId = (value) => {
-  localStorage.setItem(TOKEN_USERID, btoa(value));
+  localStorage.setItem(TOKEN_USERID, value);
 };
 
 export const deleteTokenUserId = () => {
@@ -18,13 +15,11 @@ export const deleteTokenUserId = () => {
 };
 
 export const getTokenRole = () => {
-  return (
-    localStorage.getItem(TOKEN_ROLE) && atob(localStorage.getItem(TOKEN_ROLE))
-  );
+  return localStorage.getItem(TOKEN_ROLE);
 };
 
 export const setTokenRole = (value) => {
-  localStorage.setItem(TOKEN_ROLE, btoa(value));
+  localStorage.setItem(TOKEN_ROLE, value);
 };
 
 export const deleteTokenRole = () => {
@@ -32,13 +27,11 @@ export const deleteTokenRole = () => {
 };
 
 export const getTokenAuth = () => {
-  return (
-    localStorage.getItem(TOKEN_AUTH) && atob(localStorage.getItem(TOKEN_AUTH))
-  );
+  return localStorage.getItem(TOKEN_AUTH);
 };
 
 export const setTokenAuth = (value) => {
-  localStorage.setItem(TOKEN_AUTH, btoa(value));
+  localStorage.setItem(TOKEN_AUTH, value);
 };
 
 export const deleteTokenAuth = () => {

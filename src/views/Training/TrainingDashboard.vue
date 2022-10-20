@@ -1,27 +1,19 @@
 <template>
   <div class="container pt-5">
     <div class="d-flex gap-3 align-items-center">
-      <div class="p-2 w-100">
+      <!-- <div class="p-2 w-100">
         <TextInputComponent class="my-3" placeholder="Search for training" />
       </div>
       <div class="p-2 w-25">
         <ButtonComponent label="Search" class="btn--primary--sm--100" />
-      </div>
+      </div> -->
       <div class="p-2 w-25">
-        <ButtonComponent
-          label="Add Training"
-          class="btn--primary--sm--outline"
-          @onClick="navigate"
-        />
+        <ButtonComponent label="Add Training" class="btn--primary--sm--outline" @onClick="navigate" />
       </div>
     </div>
 
     <div class="row">
-      <div
-        class="col-md-3"
-        v-for="trainingdata in traininglist"
-        :key="trainingdata.id"
-      >
+      <div class="col-md-3" v-for="trainingdata in traininglist" :key="trainingdata.id">
         <!-- {{ trainingdata}} -->
         <TrainingCard :training="trainingdata" />
       </div>
@@ -32,7 +24,7 @@
 import TrainingCard from "@/components/TrainingCard.vue";
 // import TrainginMockData from "@/utils/training.mock";
 import ButtonComponent from "@/components/ButtonComponent.vue";
-import TextInputComponent from "@/components/TextInputComponent.vue";
+// import TextInputComponent from "@/components/TextInputComponent.vue";
 import { mapGetters } from "vuex";
 export default {
   name: "TrainingDashboard",
@@ -50,7 +42,7 @@ export default {
   components: {
     TrainingCard,
     ButtonComponent,
-    TextInputComponent,
+    // TextInputComponent,
   },
   computed: {
     ...mapGetters({

@@ -15,7 +15,7 @@
         <div class="col-8">
           <div class="row">
             <div class="col-auto" v-if="user.role === 'USER'">
-              <img
+              <!-- <img
                 src="@/assets/check.png"
                 alt="checkbox"
                 width="25"
@@ -24,7 +24,8 @@
                     ? 'check--logo--completed'
                     : 'check--logo--incompleted'
                 "
-              />
+              /> -->
+              <img src="@/assets/check.png" alt="checkbox" width="25" class="check--logo--incompleted" />
             </div>
             <div class="col-10">
               <p class="day--title">Day {{ trainingDay.name }}</p>
@@ -52,21 +53,13 @@
     <div class="collapse" :id="'collapseExample' + index">
       <div class="p-3">
         <div class="card card-body">
-          <div
-            class="row align-items-center my-1"
-            v-for="(data, index) in trainingDay.tasks"
-            :key="index"
-          >
+          <div class="row align-items-center my-1" v-for="(data, index) in trainingDay.tasks" :key="index">
             <div class="col-auto" v-if="user.role === 'USER'">
               <img
                 src="@/assets/check.png"
                 alt="checkbox"
                 width="18"
-                :class="
-                  data.status
-                    ? 'check--logo--completed'
-                    : 'check--logo--incompleted'
-                "
+                :class="data.status ? 'check--logo--completed' : 'check--logo--incompleted'"
               />
             </div>
             <div class="col-10">

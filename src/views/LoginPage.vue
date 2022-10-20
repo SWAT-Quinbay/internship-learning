@@ -7,49 +7,23 @@
             <h4 class="login--header">Sign-in to your account</h4>
           </center>
           <div class="action--form--controller">
-            <label for="user-name" class="action--input--label"
-              >Enter Email:</label
-            >
-            <input
-              type="text"
-              class="action--input"
-              v-model="user.email"
-              required
-            />
+            <label for="user-name" class="action--input--label">Enter Email:</label>
+            <input type="text" class="action--input" v-model="user.email" required />
           </div>
           <div class="action--form--controller">
-            <label for="user-password" class="action--input--label"
-              >Enter Password:</label
-            >
-            <input
-              type="password"
-              class="action--input"
-              v-model="user.password"
-            />
+            <label for="user-password" class="action--input--label">Enter Password:</label>
+            <input type="password" class="action--input" v-model="user.password" />
           </div>
-          <span v-if="UnAuthorized" style="color: red; text-align: center"
-            >Wrong Credentials! Acces Denied.</span
-          >
+          <span v-if="UnAuthorized" style="color: red; text-align: center">Wrong Credentials! Acces Denied.</span>
           <div class="login--button">
             <div class="row justify-content-center">
               <div class="col-7">
-                <ButtonComponent
-                  label="Login"
-                  class="btn--primary"
-                  type="button"
-                  @onClick="login()"
-                />
+                <ButtonComponent label="Login" class="btn--primary" type="button" @onClick="login()" />
               </div>
             </div>
           </div>
-          <div
-            class="fw-normal text-center"
-            style="cursor: pointer"
-            @click="navigate"
-          >
-            <p style="color: #5653ff; font-size: 14px">
-              Don't have an account ?
-            </p>
+          <div class="fw-normal text-center" style="cursor: pointer" @click="navigate">
+            <p style="color: #5653ff; font-size: 14px">Don't have an account ?</p>
           </div>
         </div>
       </div>
@@ -84,14 +58,14 @@ export default {
       this.UnAuthorized = false;
       loginUser({
         user: this.user,
-        success: (res) => {
-          console.log("login", res);
-          if (res.data.status == "OK") {
-            setTokenUserId(res.data.id);
-            setTokenRole(res.data.role);
+        success: ({ data }) => {
+          console.log("login", data);
+          if (data.status == "OK" && (data.role === "USER" || data.role === "ADMIN")) {
+            setTokenUserId(data.id);
+            setTokenRole(data.role);
             setTokenAuth(true);
-            this.$store.dispatch("SET_USER", res.data);
-            redirectWithRole(res.data.role);
+            this.$store.dispatch("SET_USER", data);
+            redirectWithRole(data.role);
           } else {
             this.UnAuthorized = true;
           }
